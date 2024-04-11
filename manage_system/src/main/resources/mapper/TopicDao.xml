@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inext.manage_system.dao.TopicDao">
+
+    <select id="searchTopicByTopicId" resultType="String"> 
+        SELECT topic_id 
+        FROM topic 
+        WHERE topic_id = #{topicId}
+    </select>
+
+    <select id="searchTopicByTopicName">
+        SELECT topic_name 
+        FROM topic 
+        WHERE topic_name = #{topicName}
+    </select>
+
+</mapper>
