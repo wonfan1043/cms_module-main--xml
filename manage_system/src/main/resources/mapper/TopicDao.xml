@@ -15,4 +15,43 @@
         WHERE topic_name = #{topicName}
     </select>
 
+    <insert id="createTopic">
+        INSERT INTO topic (topic_id, topic_name, comment, creater, create_datetime) 
+        VALUES (#{topicId}, #{topicName}, #{comment}, #{creater}, #{createDateTime})
+    </insert>
+
+    <update id="updateTopic">
+        UPDATE topic 
+        SET topic_name = #{topicName}, comment = #{comment}, updater = #{updater}, update_datetime = #{updateDateTime} 
+        WHERE topic_id = #{topicId} 
+        AND `delete` = 0"
+    </update>
+
+    <select id="searchAllTopics">
+        SELECT topic_id, topic_name, create_datetime 
+        FROM topic 
+        WHERE `delete` = 0"
+    </select>
+
+    <select id="searchTopicByReq">
+        SELECT topic_id, topic_name, create_datetime 
+        FROM topic 
+        WHERE YEAR(create_datetime) = #{year} 
+        AND MONTH(create_datetime) = #{month} 
+        AND topic_name LIKE '%#{keyword}%' 
+        AND `delete` = 0
+    </select>
+
+    <select id="checkTopic">
+        SELECT * FROM topic 
+        WHERE topic_id = #{topicId} 
+        AND `delete` = 0
+    </select>
+
+    <update id="deleteTopic">
+        UPDATE topic 
+        SET updater = #{updater}, update_datetime = #{updateDateTime}, `delete` = 1 
+        WHERE topic_id = #{topicId}
+    </update>
+
 </mapper>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.inext.manage_system.dao.TopicDao;
-import com.inext.manage_system.enums.RtnCode;
+import com.inext.manage_system.enums.CommonMessage;
 import com.inext.manage_system.dto.BaseRes;
 import com.inext.manage_system.dto.CreateTopicReq;
 import com.inext.manage_system.dto.DeleteTopicReq;
@@ -30,21 +30,21 @@ public class TopicServiceImpl implements TopicService {
     public BaseRes createTopic(CreateTopicReq req) {
         // 引数チェック＋データバイトチェック＋存在チェック
         if (checkParam(req.getTopicId(), req.getTopicName(), req.getCreater()) == false) {
-            return new BaseRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
+            return new BaseRes(CommonMessage.PARAM_ERROR.getCode(), CommonMessage.PARAM_ERROR.getMessage());
         }
         if (checkByte(req.getTopicId(), req.getTopicName(), req.getComment(), req.getCreater()) == false) {
-            return new BaseRes(RtnCode.DATA_TOO_BIG.getCode(), RtnCode.DATA_TOO_BIG.getMessage());
+            return new BaseRes(CommonMessage.DATA_TOO_BIG.getCode(), CommonMessage.DATA_TOO_BIG.getMessage());
         }
         if (checkExist(req.getTopicId(), req.getTopicName(), true) == false) {
-            return new BaseRes(RtnCode.TOPIC_ALREADY_EXISTS.getCode(), RtnCode.TOPIC_ALREADY_EXISTS.getMessage());
+            return new BaseRes(CommonMessage.TOPIC_ALREADY_EXISTS.getCode(), CommonMessage.TOPIC_ALREADY_EXISTS.getMessage());
         }
 
         // 作成
         int result = topicDao.createTopic(req.getTopicId(), req.getTopicName(), req.getComment(), req.getCreater(), LocalDateTime.now());
         if(result != 1){
-            return new BaseRes(RtnCode.ERROR.getCode(), RtnCode.ERROR.getMessage());
+            return new BaseRes(CommonMessage.ERROR.getCode(), CommonMessage.ERROR.getMessage());
         }
-        return new BaseRes(RtnCode.SUCCESS.getCode(), RtnCode.SUCCESS.getMessage());
+        return new BaseRes(CommonMessage.CREATE_SUCCESS.getCode(), CommonMessage.CREATE_SUCCESS.getMessage());
     }
 
     // 主旨更新
@@ -52,21 +52,21 @@ public class TopicServiceImpl implements TopicService {
     public BaseRes updateTopic(UpdateTopicReq req) {
         // 引数チェック＋データバイトチェック＋存在チェック
         if (checkParam(req.getTopicId(), req.getTopicName(), req.getUpdater()) == false) {
-            return new BaseRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
+            return new BaseRes(CommonMessage.PARAM_ERROR.getCode(), CommonMessage.PARAM_ERROR.getMessage());
         }
         if (checkByte(req.getTopicId(), req.getTopicName(), req.getComment(), req.getUpdater()) == false) {
-            return new BaseRes(RtnCode.DATA_TOO_BIG.getCode(), RtnCode.DATA_TOO_BIG.getMessage());
+            return new BaseRes(CommonMessage.DATA_TOO_BIG.getCode(), CommonMessage.DATA_TOO_BIG.getMessage());
         }
         if (checkExist(req.getTopicId(), req.getTopicName(), false) == false) {
-            return new BaseRes(RtnCode.TOPIC_ALREADY_EXISTS.getCode(), RtnCode.TOPIC_ALREADY_EXISTS.getMessage());
+            return new BaseRes(CommonMessage.TOPIC_ALREADY_EXISTS.getCode(), CommonMessage.TOPIC_ALREADY_EXISTS.getMessage());
         }
 
         // 更新
         int result = topicDao.updateTopic(req.getTopicId(), req.getTopicName(), req.getComment(), req.getUpdater(), LocalDateTime.now());
         if(result != 1){
-            return new BaseRes(RtnCode.ERROR.getCode(), RtnCode.ERROR.getMessage());
+            return new BaseRes(CommonMessage.ERROR.getCode(), CommonMessage.ERROR.getMessage());
         }
-        return new BaseRes(RtnCode.SUCCESS.getCode(), RtnCode.SUCCESS.getMessage());
+        return new BaseRes(CommonMessage.UPDATE_SUCCESS.getCode(), CommonMessage.UPDATE_SUCCESS.getMessage());
     }
 
     // 主旨検索
@@ -75,7 +75,7 @@ public class TopicServiceImpl implements TopicService {
         // 時間帯チェック
         if(req.getYear() > LocalDate.now().getYear() || req.getMonth() > LocalDate.now().getMonthValue() || req.getMonth() < 1 || req.getMonth() > 12){
             List<SearchTopicRes> result = new ArrayList<>();
-            result.add(new SearchTopicRes(RtnCode.PARAM_ERROR));
+            result.add(new SearchTopicRes(CommonMessage.PARAM_ERROR));
             return result;
         }
 
@@ -87,7 +87,7 @@ public class TopicServiceImpl implements TopicService {
         // 検索
         List<SearchTopicRes> result = topicDao.searchTopicByReq(req.getYear(), req.getMonth(), req.getKeyword());
         if (result.isEmpty()) {
-            result.add(new SearchTopicRes(RtnCode.TOPIC_NOT_FOUND));
+            result.add(new SearchTopicRes(CommonMessage.TOPIC_NOT_FOUND));
         }
         return result;
     }
@@ -97,13 +97,13 @@ public class TopicServiceImpl implements TopicService {
     public TopicContentRes checkTopic(String topicId) {
         // 引数チェック
         if (!StringUtils.hasText(topicId)) {
-            return new TopicContentRes(RtnCode.PARAM_ERROR);
+            return new TopicContentRes(CommonMessage.PARAM_ERROR);
         }
 
         // データ抽出
         TopicContentRes result = topicDao.checkTopic(topicId);
         if (result == null) {
-            return new TopicContentRes(RtnCode.TOPIC_NOT_FOUND);
+            return new TopicContentRes(CommonMessage.TOPIC_NOT_FOUND);
         }
         return result;
     }
@@ -113,18 +113,18 @@ public class TopicServiceImpl implements TopicService {
     public BaseRes deleteTopic(DeleteTopicReq req) {
         // 引数チェック＋存在チェック
         if (checkParam(req.getTopicId(), req.getTopicName(), req.getUpdater()) == false) {
-            return new BaseRes(RtnCode.PARAM_ERROR.getCode(), RtnCode.PARAM_ERROR.getMessage());
+            return new BaseRes(CommonMessage.PARAM_ERROR.getCode(), CommonMessage.PARAM_ERROR.getMessage());
         }
         if (checkExist(req.getTopicId(), req.getTopicName(), false) == false) {
-            return new BaseRes(RtnCode.TOPIC_NOT_FOUND.getCode(), RtnCode.TOPIC_NOT_FOUND.getMessage());
+            return new BaseRes(CommonMessage.TOPIC_NOT_FOUND.getCode(), CommonMessage.TOPIC_NOT_FOUND.getMessage());
         }
 
         // 削除
         int result = topicDao.deleteTopic(req.getTopicId(), req.getUpdater(), LocalDateTime.now());
         if(result != 1){
-            return new BaseRes(RtnCode.ERROR.getCode(), RtnCode.ERROR.getMessage());
+            return new BaseRes(CommonMessage.ERROR.getCode(), CommonMessage.ERROR.getMessage());
         }
-        return new BaseRes(RtnCode.SUCCESS.getCode(), RtnCode.SUCCESS.getMessage());
+        return new BaseRes(CommonMessage.REMOVE_SUCCESS.getCode(), CommonMessage.REMOVE_SUCCESS.getMessage());
     }
 
 

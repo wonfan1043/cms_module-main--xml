@@ -1,6 +1,6 @@
 package com.inext.manage_system.dto;
 
-import com.inext.manage_system.enums.RtnCode;
+import com.inext.manage_system.enums.CommonMessage;
 import com.inext.manage_system.model.Topic;
 
 import lombok.AllArgsConstructor;
@@ -14,10 +14,10 @@ public class TopicContentRes {
 
     private Topic topic;
 
-    private RtnCode rtnCode;
+    private CommonMessage message;
 
-    public TopicContentRes(RtnCode rtnCode) {
-        this.rtnCode = rtnCode;
+    public TopicContentRes(CommonMessage message) {
+        this.message = message;
     }
 
 }
