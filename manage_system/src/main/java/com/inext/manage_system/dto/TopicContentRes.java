@@ -12,12 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TopicContentRes {
 
+    /** 主旨詳細 **/
     private Topic topic;
 
+    /** Common Message **/
     private CommonMessage message;
-
-    public TopicContentRes(CommonMessage message) {
-        this.message = message;
-    }
 
 }

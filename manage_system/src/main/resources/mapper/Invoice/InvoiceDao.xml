@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inext.manage_system.dao.InvoiceDao">
+
+    <!-- 請求書番号取得 by invoiceNo -->
+    <select id="selectInvoiceNoByInvoiceNo" resultType="String">
+        SELECT invoice_no
+        FROM invoice
+        WHERE invoice_no = #{invoiceNo}
+    </select>
+
+    <!-- 請求書追加 -->
+    <insert id="insertInvoice">
+        INSERT INTO invoice 
+        (invoice_no,
+         corp_id, 
+         topic_id, 
+         bank_id, 
+         memo, tax, 
+         other, 
+         due_date, 
+         charge_date, 
+         creater, 
+         create_datetime,
+         updater,
+         update_datetime,
+         `delete`)
+        VALUES (#{invoiceNo},
+                #{corpId},
+                #{topicId},
+                #{bankId},
+                #{memo},
+                #{tax},
+                #{other},
+                #{dueDate},
+                #{chargeDate},
+                #{creater},
+                #{createDateTime},
+                Null,
+                Null,
+                0)
+    </insert>
+
+    <!-- 請求書内容更新 -->
+    <update id="updateInvoice">
+        UPDATE invoice
+        SET corp_id = #{corpId},
+            topic_id = #{topicId}, 
+            bank_id = #{bankId}, 
+            memo = #{memo}, 
+            tax = #{tax}, 
+            other = #{other}, 
+            due_date = #{dueDate}, 
+            charge_date = #{chargeDate}, 
+            updater = #{updater}, 
+            update_datetime = #{updateDateTime}
+        WHERE invoice_no = #{invoiceNo}
+          AND `delete` = 0
+    </update>
+
+    <!-- 請求書取得 by dateType, corpId -->
+    <select id="selectInvoiceByDateTypeCorpId" resultType="com.inext.manage_system.model.Invoice">
+        SELECT invoice_no,
+               corp_id,
+               due_date,
+               charge_date,
+               pay_date,
+               create_datetime
+        FROM invoice
+        <where>
+            <if test="req.dateType == 1">
+                    YEAR(create_datetime) = #{req.year},
+                AND MONTH(create_datetime) = #{req.month}
+            </if>
+            <if test="req.dateType == 2">
+                    YEAR(charge_date) = #{req.year},
+                AND MONTH(charge_date) = #{req.month}
+            </if>
+            <if test="req.dateType == 3">
+                    YEAR(due_date) = #{req.year},
+                AND MONTH(due_date) = #{req.month}
+            </if>
+            <if test="req.dateType == 4">
+                    YEAR(pay_date) = #{req.year},
+                AND MONTH(pay_date) = #{req.month}
+            </if>
+            <if test="req.corpId != 0">
+                AND corp_id = #{req.corpId}
+            </if>
+                AND `delete` = 0
+        </where>
+        ORDER BY create_datetime DESC
+    </select>
+
+    <!-- 請求書詳細取得 -->
+    <select id="selectInvoiceAndChargeContent" resultType="com.inext.manage_system.dto.InvoiceContentRes">
+        SELECT i.invoice_no,
+               i.corp_id,
+               i.topic_id, 
+               i.bank_id, 
+               i.tax, 
+               i.memo, 
+               i.due_date, 
+               i.create_datetime, 
+               c.item_id, 
+               c.quantity, 
+               c.unit_price
+        FROM invoice AS i
+        JOIN charge_content AS c
+          ON i.invoice_no = c.invoice_no
+        WHERE i.invoice_no = #{invoiceNo}
+          AND i.delete = 0
+          AND c.delete = 0
+    </select>
+
+    <!-- 請求書状態編集 -->
+    <update id="updateInvoiceStatus">
+        UPDATE invoice
+        SET updater = #{invoice.updater},
+            updateDateTime = #{invoice.updateDateTime},
+            `delete` = 1
+        WHERE invoice_no = #{invoice.invoiceNo}
+    </update>
+
+</mapper>

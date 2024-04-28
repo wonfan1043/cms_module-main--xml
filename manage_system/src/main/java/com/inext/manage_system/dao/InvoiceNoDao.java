@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface InvoiceNoDao {
 
-    public int findLastNumber();
+    // 最後の番号を取得
+    public int selectInvoiceNoByOrder();
 
-    public int addNumber(@Param("type") String type);
+    // 新番号追加
+    public void insertInvoiceNo(@Param("type") String type);
 
 }

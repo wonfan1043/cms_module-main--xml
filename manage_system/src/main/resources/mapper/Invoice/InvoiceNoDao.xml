@@ -3,15 +3,19 @@
 
 <mapper namespace="com.inext.manage_system.dao.TopicDao">
 
-    <select id="findLastNumber"> 
+    <!-- 最後の番号を取得 -->
+    <select id="selectInvoiceNoByOrder" resultType="int"> 
         SELECT number 
         FROM invoice_no 
         ORDER BY number DESC 
         LIMIT 1
     </select>
 
-    <insert id="addNumber">
-        INSERT INTO invoice_no (type) VALUES (#{type})
+    <!-- 新番号追加 -->
+    <insert id="insertInvoiceNo">
+        INSERT INTO invoice_no 
+        (type) 
+        VALUES (#{type})
     </insert>
 
 </mapper>

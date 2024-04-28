@@ -1,19 +1,25 @@
 package com.inext.manage_system.dao;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Param;
+
+import com.inext.manage_system.model.ChargeContent;
 
 @Mapper
 public interface ChargeContentDao {
+    
+    //請求内容追加
+    public void insertChargeContent(@Param("chargeContent") List<ChargeContent> chargeContent);
 
-    public int addContent(String invoiceNo, int itemId, int quantity, int unitPrice, String creater, LocalDateTime createDateTime);
+    //請求内容データ数取得 by invoiceNo
+    public int selectChargeContentByInvoiceNo(@Param("invoiceNo") String invoiceNo);
 
-    public int deleteAllContent(String invoiceNo);
+    //請求内容削除 by invoiceNo
+    public void deleteChargeContentByInvoiceNo(@Param("invoiceNo") String invoiceNo);
 
-    public int deleteContent(String invoiceNo, String updater, LocalDateTime updateDateTimeo);
+    //請求内容状態編集
+    public void updateChargeContentStatusByInvoiceNo(@Param("chargeContent") ChargeContent chargeContent);
 
 }

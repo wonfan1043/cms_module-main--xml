@@ -1,9 +1,9 @@
 package com.inext.manage_system.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import com.inext.manage_system.enums.CommonMessage;
+import com.inext.manage_system.model.Invoice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,13 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchInvoiceRes {
 
-    private String invoiceNo;
-
-    private int corpId;
-
-    private LocalDate chargeDate;
-
-    private LocalDateTime createDateTime;
+    private List<Invoice> invoiceList;
 
     private CommonMessage message;
 

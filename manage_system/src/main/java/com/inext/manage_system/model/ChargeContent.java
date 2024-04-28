@@ -22,9 +22,9 @@ public class ChargeContent {
     private String creater;
 
     private LocalDateTime createDateTime;
-
+    
     private String updater;
-
+    
     private LocalDateTime updateDateTime;
 
     private boolean delete;

@@ -10,17 +10,17 @@ import com.inext.manage_system.enums.CommonMessage;
 @Data
 public class InvoiceContentRes {
 
+    private String invoiceNo;
+
     private int corpId;
 
     private String topicId;
 
     private int bankId;
 
-    private String memo;
-
     private float tax;
 
-    private String other;
+    private String memo;
 
     private LocalDate dueDate;
 
@@ -33,7 +33,7 @@ public class InvoiceContentRes {
     private int unitPrice;
 
     private CommonMessage message;
-    
+
     public InvoiceContentRes(CommonMessage message) {
     }
 

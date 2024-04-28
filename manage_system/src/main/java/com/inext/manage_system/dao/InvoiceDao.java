@@ -1,35 +1,33 @@
 package com.inext.manage_system.dao;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.inext.manage_system.dto.InvoiceContentRes;
-import com.inext.manage_system.dto.SearchInvoiceRes;
+import com.inext.manage_system.dto.SearchInvoiceReq;
+import com.inext.manage_system.model.Invoice;
 
 @Mapper
 public interface InvoiceDao {
 
-    public int searchInvoiceByInvoiceNo(String invoiceNo);
+    // 請求書番号取得 by invoiceNo
+    public String selectInvoiceNoByInvoiceNo(@Param("invoiceNo") String invoiceNo);
 
-    public int createInvoice(String invoiceNo, int corpId, String topicId, int bankId, String memo, float tax, String other, LocalDate dueDate, LocalDate chargeDate, String creater, LocalDateTime createDateTime);
+    // 請求書追加
+    public void insertInvoice(@Param("invoice") Invoice invoice);
 
-    public int updateInvoice(String invoiceNo, int corpId, String topicId, int bankId, String memo, float tax, String other, LocalDate dueDate, LocalDate chargeDate, String updater, LocalDateTime updateDateTime);
+    // 請求書内容更新
+    public void updateInvoice(@Param("invoice") Invoice invoice);
 
-    public List<SearchInvoiceRes> searchAllInvoices();
+    // 請求書取得 by dateType, corpId
+    public List<Invoice> selectInvoiceByDateTypeCorpId(@Param("req") SearchInvoiceReq req);
 
-    public List<SearchInvoiceRes> searchInvoiceByCreateDate(int year, int month);
-
-    public List<SearchInvoiceRes> searchInvoiceByDueDate(int year, int month);
-
-    public List<SearchInvoiceRes> searchInvoiceByChargeDate(int year, int month);
+    // 請求書詳細取得
+    public InvoiceContentRes selectInvoiceAndChargeContent(@Param("invoiceNo") String invoiceNo);
     
-    public List<SearchInvoiceRes> searchInvoiceByPayDate(int year, int month);
-
-    public InvoiceContentRes checkInvoice(String invoiceNo);
-    
-    public int deleteInvoice(String invoiceNo, String updater, LocalDateTime updateDateTime);
+    // 請求書状態編集
+    public void updateInvoiceStatus(@Param("invoice") Invoice invoice);
 }
 

@@ -11,21 +11,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Topic {
 
-    private String topId;
+    /** 主旨ID **/
+    private String topicId;
 
+    /** 主旨 **/
     private String topicName;
 
+    /** コメント **/
     private String comment;
 
+    /** 作成者 **/
     private String creater;
 
+    /** 作成時間 **/
     private LocalDateTime createDateTime;
 
+    /** 編集者 **/
     private String updater;
 
+    /** 編集時間 **/
     private LocalDateTime updateDateTime;
 
-    public Topic(String topicId) {
-    }
+    /** 削除フラグ **/
+    private boolean delete;
 
 }

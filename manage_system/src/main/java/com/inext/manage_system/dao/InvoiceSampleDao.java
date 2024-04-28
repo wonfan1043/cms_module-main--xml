@@ -1,21 +1,23 @@
 package com.inext.manage_system.dao;
 
-import java.time.LocalDateTime;
-
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Param;
+
+import com.inext.manage_system.model.InvoiceSample;
 
 @Mapper
 public interface InvoiceSampleDao {
 
-    public int searchInvoiceSampleByCorpId(int corpId);
+    // サンプル請求書番号取得 by corpId
+    public InvoiceSample selectInvoiceSampleByCorpId(@Param("corpId") int corpId);
 
-    public int createSample(int corpId, String invoiceNo, String creater, LocalDateTime createDateTime);
+    // サンプル追加
+    public void insertInvoiceSample(@Param("invoiceSample") InvoiceSample invoiceSample);
 
-    public int updateSample(int corpId, String invoiceNo, String updater, LocalDateTime updateDateTime);
+    // サンプル編集
+    public void updateInvoiceSampleByCorpId(@Param("invoiceSample") InvoiceSample invoiceSample);
 
-    public int deleteSample(int corpId, String updater, LocalDateTime updateDateTime);
+    // サンプル状態編集
+    public void updateInvoiceSampleStatusByCorpId(@Param("invoiceSample") InvoiceSample invoiceSample);
 
 }

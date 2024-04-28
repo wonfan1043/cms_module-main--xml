@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inext.manage_system.dao.InvoiceSampleDao">
+
+    <!-- サンプル請求書番号取得 by corpId -->
+    <select id="selectInvoiceSampleByCorpId" resultType="com.inext.manage_system.model.InvoiceSample">
+        SELECT corp_id,
+               topic_id,
+               bank_id,
+               tax
+        FROM invoice_sample
+        WHERE corp_id = #{corpId}
+          AND `delete` = 0
+    </select>
+
+    <!-- サンプル追加 -->
+    <insert id="insertInvoiceSample">
+        INSERT INTO invoice_sample
+        (corp_id,
+         topic_id,
+         bank_id,
+         tax,
+         creater,
+         create_datetime,
+         updater,
+         update_datetime,
+         `delete`)
+        VALUES (#{invoiceSample.corpId},
+                #{invoiceSample.topicId},
+                #{invoiceSample.bankId},
+                #{invoiceSample.tax},
+                #{invoiceSample.creater},
+                #{invoiceSample.createDatetime},
+                Null,
+                Null,
+                0)
+    </insert>
+
+    <!-- サンプル編集 -->
+    <update id="updateInvoiceSampleByCorpId">
+        UPDATE invoice_sample
+        SET topic_id = #{invoiceSample.topicId},
+            bank_id = #{invoiceSample.bankId},
+            tax = #{invoiceSample.tax},
+            updater = #{invoiceSample.updater},
+            update_datetime = #{invoiceSample.updateDatetime}
+        WHERE corp_id = #{invoiceSample.corpId}
+    </update>
+    
+    <!-- サンプル状態編集 -->
+    <update id="updateInvoiceSampleStatusByCorpId">
+        UPDATE invoice_sample
+        SET updater= #{invoiceSample.updater},
+            updateDateTime = #{invoiceSample.updateDatetime},
+            `delete` = 1
+        WHERE corp_id = #{invoiceSample.corpId}
+    </update>
+
+</mapper>

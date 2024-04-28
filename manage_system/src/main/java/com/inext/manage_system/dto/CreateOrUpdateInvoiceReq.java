@@ -1,46 +1,21 @@
 package com.inext.manage_system.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.inext.manage_system.model.ChargeContent;
+import com.inext.manage_system.model.Invoice;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateOrUpdateInvoiceReq {
+
+    private Invoice invoice;
     
-    private String invoiceNo;
-
-    private int corpId;
-
-    private String topicId;
-
-    private int bankId;
-
-    private String memo;
-
     private List<ChargeContent> products;
-
-    private float tax;
-
-    private String other;
-
-    private LocalDate dueDate;
-
-    private LocalDate chargeDate;
-
-    private LocalDate payDate;
-
-    private String creater;
-    
-    private LocalDateTime createDateTime;
-
-    private String updater;
-
-    private LocalDateTime updateDateTime;
-
-    private boolean delete;
 
 }

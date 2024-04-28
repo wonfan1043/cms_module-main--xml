@@ -1,8 +1,9 @@
 package com.inext.manage_system.dto;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import com.inext.manage_system.enums.CommonMessage;
+import com.inext.manage_system.model.Topic;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,16 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchTopicRes {
 
-    private LocalDateTime createDateTime;
+    /** 主旨リスト **/
+    private List<Topic> topicList;
 
-    private String topicName;
-    
-    private String topicId;
-
+    /** Common Message **/
     private CommonMessage message;
-
-    public SearchTopicRes(CommonMessage message) {
-        this.message = message;
-    }
-
+    
 }
