@@ -12,7 +12,7 @@
         WHERE invoice_no = #{invoiceNo}
     </select>
 
-    <!-- 請求書番号取得 by invoiceNo -->
+    <!-- 税率リスト取得 -->
     <select id="selectTaxRateDistinct" resultType="Float">
         SELECT DISTINCT tax
         FROM invoice
