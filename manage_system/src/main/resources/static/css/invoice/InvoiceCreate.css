@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@200;300;400&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "IBM Plex Sans JP", sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: large;
+}
+
+body {
+    border: 1px solid black;
+    width: 80vw;
+    height: auto;
+    margin-top: 3%;
+    margin-left: 10%;
+    padding-left: 5%;
+    color: royalblue;
+}
+
+select {
+    color: royalblue;
+    width: 40%;
+    padding-left: .5%;
+}
+
+.title {
+    width: 90%;
+    height: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: x-large;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 1.5%;
+}
+
+p {
+    width: 20%;
+}
+
+p .necessary{
+    color: rgb(249, 62, 62);
+}
+
+.createDate {
+    width: 20vw;
+}
+
+input {
+    width: 40%;
+    padding-left: .5%;
+}
+
+.chargeContent {
+    width: 70%;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    padding: 1.5% 3%;
+    padding-top: 2.5%;
+    background-color: rgb(224, 237, 249);
+    border-radius: 10px;
+}
+
+.chargeContent input {
+    width: 66%;
+}
+
+.chargeContent .deleteBtn {
+    width: 8%;
+    height: 100%;
+    margin-left: 2%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+.chargeContent .gap {
+    width: 100%;
+    height: 3vh;
+}
+
+.addBtn {
+    width: 8%;
+    height: 100%;
+    margin: 0% 32%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+.product {
+    width: 66%;
+}
+
+.taxInputRow {
+    width: 50%;
+    padding: 1%;
+    padding-left: 3%;
+    background-color: rgb(224, 237, 249);
+    border-radius: 10px;
+}
+
+.taxInputRow .taxInput {
+    width: 70%;
+    height: 50%;
+    padding-left: .5%;
+    margin-right: 1%;
+}
+
+.taxInputRow .addTax {
+    width: 10%;
+    height: 50%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+    margin-left: 3%;
+}
+
+textarea {
+    width: 40%;
+    height: 30vh;
+    resize: none;
+    padding: .5%;
+}
+
+#year, #month, #date {
+    width: auto;
+}
+
+.buttons {
+    width: 100%;
+    height: 8vh;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons button {
+    width: 10%;
+    height: 100%;
+    margin: 0% 1%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}

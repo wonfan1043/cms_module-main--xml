@@ -24,13 +24,13 @@ public class Topic {
     private String creater;
 
     /** 作成時間 **/
-    private LocalDateTime createDateTime;
+    private LocalDateTime createDatetime;
 
     /** 編集者 **/
     private String updater;
 
     /** 編集時間 **/
-    private LocalDateTime updateDateTime;
+    private LocalDateTime updateDatetime;
 
     /** 削除フラグ **/
     private boolean delete;

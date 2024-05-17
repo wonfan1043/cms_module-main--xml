@@ -14,8 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateOrUpdateInvoiceReq {
 
+    /** 作成/編集する請求書 **/
     private Invoice invoice;
     
+    /** 作成/編集する請求書の請求内容 **/
     private List<ChargeContent> products;
 
 }

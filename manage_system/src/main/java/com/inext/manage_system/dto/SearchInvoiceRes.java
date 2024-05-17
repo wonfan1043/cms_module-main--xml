@@ -2,7 +2,6 @@ package com.inext.manage_system.dto;
 
 import java.util.List;
 
-import com.inext.manage_system.enums.CommonMessage;
 import com.inext.manage_system.model.Invoice;
 
 import lombok.AllArgsConstructor;
@@ -14,11 +13,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchInvoiceRes {
 
+    /** 主旨リスト **/
     private List<Invoice> invoiceList;
 
-    private CommonMessage message;
+    /** 結果メッセージのコード **/
+    private int code;
 
-    public SearchInvoiceRes(CommonMessage message) {
-    }
+    /** 結果メッセージ **/
+    private String message;
 
 }

@@ -14,6 +14,9 @@ public interface InvoiceService {
     // 採番取得
     public int getNewNumber();
 
+    // 消費税リスト取得
+    public List<Float> getTaxRateList();
+
     // 新規作成
     public BaseRes createInvoice(CreateOrUpdateInvoiceReq req);
 
@@ -21,10 +24,10 @@ public interface InvoiceService {
     public BaseRes updateInvoice(CreateOrUpdateInvoiceReq req);
 
     // 請求書検索
-    public List<SearchInvoiceRes> searchInvoice(SearchInvoiceReq req);
+    public SearchInvoiceRes searchInvoice(SearchInvoiceReq req);
 
     // 請求書詳細確認
-    public InvoiceContentRes checkInvoice(String invoiceNo);
+    public InvoiceContentRes checkInvoiceContent(String invoiceNo);
 
     // 請求書削除
     public BaseRes deleteInvoice(Invoice invoice);

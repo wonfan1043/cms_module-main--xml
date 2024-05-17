@@ -35,6 +35,64 @@ public class SessionFilter implements Filter {
 
     private final List<Pattern> userUrlPatterns = List.of(
 
+
+            // "/manager/invoice/invoice_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_list$"),
+
+            // "/manager/invoice/search_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_invoice$"),
+
+            // "/manager/invoice/delete_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_invoice$"),
+
+            // "/manager/invoice/edit_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_invoice$"),
+
+            // "/manager/invoice/invoice_view"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_view?[^?]+$"),
+
+            // "/manager/invoice/create_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_invoice$"),
+
+            // "/manager/invoice/save_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_invoice$"),
+
+            // "/manager/invoice/update_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_invoice$"),
+
+            // "/manager/invoice/get_bank_info"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_bank_info$"),
+
+            // "/manager/invoice/save_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_sample$"),
+
+            // "/manager/invoice/get_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_sample?[^?]+$"),
+
+            // "/manager/invoice/topic_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list$"),
+
+            // "/manager/invoice/search_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_topic$"),
+
+            // "/manager/invoice/delete_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_topic$"),
+
+            // "/manager/invoice/topic_list_change_page"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list/change_page$"),
+
+            // "/manager/invoice/edit_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_topic?[^?]+$"),
+
+            // "/manager/invoice/update_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_topic$"),
+
+            // "/manager/invoice/create_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_topic$"),
+
+            // "/manager/invoice/save_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_topic$"),
+
             // ユーザーダッシュボード
             Pattern.compile("^/user/dashboard$"),
 
@@ -42,6 +100,65 @@ public class SessionFilter implements Filter {
             Pattern.compile("^/user/logout$"));
 
     private final List<Pattern> managerUrlPatterns = Arrays.asList(
+
+
+            // "/manager/invoice/invoice_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_list$"),
+
+            // "/manager/invoice/search_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_invoice$"),
+
+            // "/manager/invoice/delete_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_invoice$"),
+
+            // "/manager/invoice/edit_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_invoice$"),
+
+            // "/manager/invoice/invoice_view"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_view?[^?]+$"),
+
+            // "/manager/invoice/create_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_invoice$"),
+
+            // "/manager/invoice/save_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_invoice$"),
+
+            // "/manager/invoice/update_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_invoice$"),
+
+            // "/manager/invoice/get_bank_info"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_bank_info$"),
+
+            // "/manager/invoice/save_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_sample$"),
+
+            // "/manager/invoice/get_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_sample?[^?]+$"),
+
+            // "/manager/invoice/topic_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list$"),
+
+            // "/manager/invoice/search_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_topic$"),
+
+            // "/manager/invoice/delete_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_topic$"),
+
+            // "/manager/invoice/topic_list_change_page"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list/change_page$"),
+
+            // "/manager/invoice/edit_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_topic?[^?]+$"),
+
+            // "/manager/invoice/update_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_topic$"),
+
+            // "/manager/invoice/create_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_topic$"),
+
+            // "/manager/invoice/save_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_topic$"),
+
             // "manager/category"のURLパターンにマッチ
             Pattern.compile("^/manager/category$"),
 
@@ -107,6 +224,63 @@ public class SessionFilter implements Filter {
 
     private final List<Pattern> commonUrlPatterns = Arrays.asList(
 
+            // "/manager/invoice/invoice_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_list$"),
+
+            // "/manager/invoice/search_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_invoice$"),
+
+            // "/manager/invoice/delete_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_invoice$"),
+
+            // "/manager/invoice/edit_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_invoice$"),
+
+            // "/manager/invoice/invoice_view"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_view?[^?]+$"),
+
+            // "/manager/invoice/create_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_invoice$"),
+
+            // "/manager/invoice/save_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_invoice$"),
+
+            // "/manager/invoice/update_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_invoice$"),
+
+            // "/manager/invoice/get_bank_info"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_bank_info$"),
+
+            // "/manager/invoice/save_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_sample$"),
+
+            // "/manager/invoice/get_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_sample?[^?]+$"),
+
+            // "/manager/invoice/topic_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list$"),
+
+            // "/manager/invoice/search_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_topic$"),
+
+            // "/manager/invoice/delete_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_topic$"),
+
+            // "/manager/invoice/topic_list_change_page"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list/change_page$"),
+
+            // "/manager/invoice/edit_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_topic?[^?]+$"),
+
+            // "/manager/invoice/update_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_topic$"),
+
+            // "/manager/invoice/create_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_topic$"),
+
+            // "/manager/invoice/save_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_topic$"),
+
             // "staff/personal/create"のURLパターンにマッチ
             Pattern.compile("^/staff/personal/create$"),
 
@@ -138,6 +312,64 @@ public class SessionFilter implements Filter {
             Pattern.compile("^/staff/[^/]+/IncentiveUpdate$"));
 
     private final List<Pattern> urlPassPattern = Arrays.asList(
+
+
+            // "/manager/invoice/invoice_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_list$"),
+
+            // "/manager/invoice/search_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_invoice$"),
+
+            // "/manager/invoice/delete_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_invoice$"),
+
+            // "/manager/invoice/edit_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_invoice$"),
+
+            // "/manager/invoice/invoice_view"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/invoice_view?[^?]+$"),
+
+            // "/manager/invoice/create_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_invoice$"),
+
+            // "/manager/invoice/save_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_invoice$"),
+
+            // "/manager/invoice/update_invoice"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_invoice$"),
+
+            // "/manager/invoice/get_bank_info"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_bank_info$"),
+
+            // "/manager/invoice/save_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_sample$"),
+
+            // "/manager/invoice/get_sample"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/get_sample?[^?]+$"),
+
+            // "/manager/invoice/topic_list"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list$"),
+
+            // "/manager/invoice/search_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/search_topic$"),
+
+            // "/manager/invoice/delete_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/delete_topic$"),
+
+            // "/manager/invoice/topic_list_change_page"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/topic_list/change_page$"),
+
+            // "/manager/invoice/edit_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/edit_topic?[^?]+$"),
+
+            // "/manager/invoice/update_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/update_topic$"),
+
+            // "/manager/invoice/create_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/create_topic$"),
+
+            // "/manager/invoice/save_topic"のURLパターンにマッチ
+            Pattern.compile("^/manager/invoice/save_topic$"),
 
             // "/{任意の文字列}/{任意の文字列}/password/edit/{任意の文字列}"のURLパターンにマッチ
             Pattern.compile("^/[^/]+/[^/]+/password/edit/[^/]+$"),

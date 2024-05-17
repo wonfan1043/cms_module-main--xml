@@ -11,7 +11,7 @@ public enum CommonMessage {
     // 成功メッセージ
     SEND_SUCCESS(1001, "送信に成功しました"), LOGIN_SUCCESS(1002, "ログインが成功しました"), SIGN_UP_SUCCESS(1003, "サインアップが成功しました"),
     PASSWORD_CHANGE_SUCCESS(1004, "パスワードを成功に変更しました"), UNICODE_EXISTS(1005, "Unicodeが存在しています"),
-    REMOVE_SUCCESS(1006, "削除に成功しました"), LOGOUT_SUCCESS(1007, "ログアウトに成功しました"), UPDATE_SUCCESS(1008, "更新に成功しました"),
+    REMOVE_SUCCESS(1006, "削除に成功しました"), LOGOUT_SUCCESS(1007, "ログアウトに成功しました"), UPDATE_SUCCESS(1008, "編集に成功しました"),
     INSERT_SUCCESS(1009, "登録に成功しました"),CREATE_SUCCESS(1010, "作成が成功しました"),PARAM_OKAY(1011,"入力内容に問題ありませんでした"),
     SUCCESS(1012, "成功しました"),
     // エラーメッセージ

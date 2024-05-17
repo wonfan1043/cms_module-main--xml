@@ -10,17 +10,20 @@ import com.inext.manage_system.model.Topic;
 
 public interface TopicService {
 
-     // 主旨作成
+    // 主旨リスト取得
+    public List<Topic> getTopicList();
+
+    // 主旨作成
     public BaseRes createTopic(Topic topic);
 
     // 主旨編集
     public BaseRes updateTopic(Topic topic);
 
     // 主旨検索
-    public List<SearchTopicRes> searchTopic(SearchTopicReq req);
+    public SearchTopicRes searchTopic(SearchTopicReq req);
 
     // 主旨詳細チェック
-    public TopicContentRes checkTopic(String topicId);
+    public TopicContentRes checkTopicContent(String topicId);
 
     // 主旨削除
     public BaseRes deleteTopic(Topic topic);

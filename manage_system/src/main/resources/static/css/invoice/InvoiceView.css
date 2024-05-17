@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@200;300;400&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "IBM Plex Sans JP", sans-serif;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: large;
+}
+
+body {
+    border: 1px solid black;
+    width: 80vw;
+    height: auto;
+    margin-top: 3%;
+    margin-left: 10%;
+    padding-left: 5%;
+    color: royalblue;
+}
+
+.title {
+    width: 90%;
+    height: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: x-large;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 1.5%;
+    width: 100%;
+    page-break-inside: avoid;
+}
+
+p {
+    width: 20%;
+}
+
+.createDate {
+    width: 60%;
+}
+
+.address {
+    width: 80%;
+}
+
+.bankAddress {
+    width: 100%;
+}
+
+.receiveAddress {
+    width: 100%;
+}
+
+.dueDate {
+    width: 20vw;
+}
+
+.contentTitle {
+    font-size: x-large;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+}
+
+.contentNo {
+    width: 10%;
+}
+
+.noText {
+    opacity: 0.7;
+}
+
+.buttons {
+    width: 100%;
+    height: 8vh;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons button {
+    width: 10%;
+    height: 100%;
+    margin: 0% 1%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+@page {
+    size: A4;
+    margin-top: 10mm;
+    margin-bottom: 10mm;
+    margin-left: 0mm;
+    margin-right: 0mm;
+}
+
+@media print {
+    * {
+        color: black;
+    }
+
+    .row {
+        display: flex;
+        margin-bottom: 2%;
+        width: 100%;
+        page-break-inside: avoid;
+    }
+
+    .contentTitle {
+        font-size: x-large;
+        margin-top: 4%;
+        margin-bottom: 1.5%;
+    }
+
+    p {
+        width: 35%;
+    }
+
+    .contentNo{
+        width: 100px;
+    }
+
+    .itemNamePrint, .unitPricePrint, .quanityPrint, .eachSumPrint{
+        width: 250px;
+        margin-right: 10px;
+    }
+    
+    .itemName, .unitPrice, .quanity, .eachSum{
+        width: 250px;
+        margin-right: 20px;
+        word-break: break-all;
+    }
+
+    .content {
+        width: 65%;
+        height: auto;
+    }
+}

@@ -12,33 +12,51 @@
         WHERE invoice_no = #{invoiceNo}
     </select>
 
+    <!-- 請求書番号取得 by invoiceNo -->
+    <select id="selectTaxRateDistinct" resultType="Float">
+        SELECT DISTINCT tax
+        FROM invoice
+        ORDER BY tax
+    </select>
+
     <!-- 請求書追加 -->
     <insert id="insertInvoice">
         INSERT INTO invoice 
         (invoice_no,
-         corp_id, 
-         topic_id, 
+         corp_name,
+         receiver,
+         postcode,
+         county,
+         town,
+         address,
+         building, 
+         topic_name, 
          bank_id, 
-         memo, tax, 
-         other, 
+         tax, 
+         memo, 
          due_date, 
-         charge_date, 
-         creater, 
+         charge_date,
+         creator, 
          create_datetime,
          updater,
          update_datetime,
          `delete`)
-        VALUES (#{invoiceNo},
-                #{corpId},
-                #{topicId},
-                #{bankId},
-                #{memo},
-                #{tax},
-                #{other},
-                #{dueDate},
-                #{chargeDate},
-                #{creater},
-                #{createDateTime},
+        VALUES (#{invoice.invoiceNo},
+                #{invoice.corpName},
+                #{invoice.receiver},
+                #{invoice.postcode},
+                #{invoice.county},
+                #{invoice.town},
+                #{invoice.address},
+                #{invoice.building},
+                #{invoice.topicName},
+                #{invoice.bankId},
+                #{invoice.tax},
+                #{invoice.memo},
+                #{invoice.dueDate},
+                #{invoice.chargeDate},
+                #{invoice.creator},
+                #{invoice.createDatetime},
                 Null,
                 Null,
                 0)
@@ -47,80 +65,75 @@
     <!-- 請求書内容更新 -->
     <update id="updateInvoice">
         UPDATE invoice
-        SET corp_id = #{corpId},
-            topic_id = #{topicId}, 
-            bank_id = #{bankId}, 
-            memo = #{memo}, 
-            tax = #{tax}, 
-            other = #{other}, 
-            due_date = #{dueDate}, 
-            charge_date = #{chargeDate}, 
-            updater = #{updater}, 
-            update_datetime = #{updateDateTime}
-        WHERE invoice_no = #{invoiceNo}
+        SET corp_name = #{invoice.corpName},
+            receiver = #{invoice.receiver},
+            postcode = #{invoice.postcode},
+            county = #{invoice.county},
+            town = #{invoice.town},
+            address = #{invoice.address},
+            building = #{invoice.building},
+            topic_name = #{invoice.topicName}, 
+            bank_id = #{invoice.bankId}, 
+            tax = #{invoice.tax}, 
+            memo = #{invoice.memo}, 
+            due_date = #{invoice.dueDate}, 
+            charge_date = #{invoice.chargeDate}, 
+            updater = #{invoice.updater}, 
+            update_datetime = #{invoice.updateDatetime}
+        WHERE invoice_no = #{invoice.invoiceNo}
           AND `delete` = 0
     </update>
 
-    <!-- 請求書取得 by dateType, corpId -->
-    <select id="selectInvoiceByDateTypeCorpId" resultType="com.inext.manage_system.model.Invoice">
+    <!-- 請求書取得 by dateType, corpName -->
+    <select id="selectInvoiceByDateTypeCorpName" resultType="com.inext.manage_system.model.Invoice">
         SELECT invoice_no,
-               corp_id,
-               due_date,
+               corp_name,
+               topic_name,
                charge_date,
-               pay_date,
                create_datetime
         FROM invoice
         <where>
             <if test="req.dateType == 1">
-                    YEAR(create_datetime) = #{req.year},
+                    YEAR(create_datetime) = #{req.year}
                 AND MONTH(create_datetime) = #{req.month}
             </if>
             <if test="req.dateType == 2">
-                    YEAR(charge_date) = #{req.year},
+                    YEAR(charge_date) = #{req.year}
                 AND MONTH(charge_date) = #{req.month}
             </if>
-            <if test="req.dateType == 3">
-                    YEAR(due_date) = #{req.year},
-                AND MONTH(due_date) = #{req.month}
+            <if test="req.corpName != null">
+                AND corp_name = #{req.corpName}
             </if>
-            <if test="req.dateType == 4">
-                    YEAR(pay_date) = #{req.year},
-                AND MONTH(pay_date) = #{req.month}
-            </if>
-            <if test="req.corpId != 0">
-                AND corp_id = #{req.corpId}
-            </if>
-                AND `delete` = 0
+            AND `delete` = 0
         </where>
         ORDER BY create_datetime DESC
     </select>
 
-    <!-- 請求書詳細取得 -->
-    <select id="selectInvoiceAndChargeContent" resultType="com.inext.manage_system.dto.InvoiceContentRes">
-        SELECT i.invoice_no,
-               i.corp_id,
-               i.topic_id, 
-               i.bank_id, 
-               i.tax, 
-               i.memo, 
-               i.due_date, 
-               i.create_datetime, 
-               c.item_id, 
-               c.quantity, 
-               c.unit_price
-        FROM invoice AS i
-        JOIN charge_content AS c
-          ON i.invoice_no = c.invoice_no
-        WHERE i.invoice_no = #{invoiceNo}
-          AND i.delete = 0
-          AND c.delete = 0
+    <!-- 請求書詳細取得 by invoiceNo -->
+    <select id="selectInvoiceByInvoiceNo" resultType="com.inext.manage_system.model.Invoice">
+        SELECT invoice_no,
+               corp_name,
+               receiver,
+               postcode,
+               county,
+               town,
+               address,
+               building,
+               topic_name,
+               bank_id,
+               tax,
+               memo,
+               due_date,
+               create_datetime
+        FROM invoice
+        WHERE invoice_no = #{invoiceNo}
     </select>
 
     <!-- 請求書状態編集 -->
     <update id="updateInvoiceStatus">
         UPDATE invoice
         SET updater = #{invoice.updater},
-            updateDateTime = #{invoice.updateDateTime},
+            update_datetime = #{invoice.updateDatetime},
             `delete` = 1
         WHERE invoice_no = #{invoice.invoiceNo}
     </update>

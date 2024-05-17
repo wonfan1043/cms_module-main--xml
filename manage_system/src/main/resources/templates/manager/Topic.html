@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>請求書主旨リスト</title>
+    <link th:href="@{/css/invoice/Topic.css}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- タイトルと新規ボタンエリア -->
+<div class="topArea">
+    <h1>請求書主旨リスト</h1>
+    <form class="addBtnForm" action="/manager/invoice/create_topic">
+        <button type="submit" class="addBtn">新規</button>
+    </form>
+</div>
+
+<!-- 検索エリア -->
+<div class="searchBar">
+    <div class="allInputs">
+        <span>検索条件</span>
+        <span>作成日付</span>
+        <select name="year" id="year"></select>
+        <select name="month" id="month">
+            <option value="1">1月</option>
+            <option value="2">2月</option>
+            <option value="3">3月</option>
+            <option value="4">4月</option>
+            <option value="5">5月</option>
+            <option value="6">6月</option>
+            <option value="7">7月</option>
+            <option value="8">8月</option>
+            <option value="9">9月</option>
+            <option value="10">10月</option>
+            <option value="11">11月</option>
+            <option value="12">12月</option>
+        </select>
+        <input id="keyword" type="text" placeholder="請求書主旨">
+    </div>
+    <button type="button" class="searchBtn">検索</button>
+</div>
+
+<!-- 検索結果アリア -->
+<div class="searchResult">
+    <div class="listTitle">
+        <span style="background-color: transparent;">No.</span>
+        <span class="createDateTitle">作成日付</span>
+        <span style="background-color: transparent;">請求書主旨</span>
+    </div>
+    <div class="eachTopic" id="list" th:fragment="list">
+        <div class="topic" id="topic" th:if="${topicList != null}" th:each="topic, index : ${topicList.list}">
+            <div class="num" th:text="${7 * (topicList.pageNum - 1) + 1 + index.index}"></div>
+            <div class="createDate" th:text="${#temporals.format(topic.createDatetime, 'yyyy/MM/dd')}"></div>
+            <div class="topicName" th:text="${topic.topicName}"></div>
+            <button type="button" class="editBtn" th:data-topic-to-edit="${topic.topicId}">編集</button>
+            <button type="button" class="deleteBtn" th:data-topic-to-delete="${topic.topicId}+'|'+${topic.topicName}">削除</button>
+        </div>
+        <input id="currentPageNum" type="text" style="display: none;" th:value="${topicList.pageNum}">
+        <input id="lastPageNum" type="text" style="display: none;" th:value="${topicList.pages}">
+    </div>
+</div>
+
+<!-- ボタンエリア -->
+<div class="buttons">
+    <button type="button" class="previousPageBtn">前ページ</button>
+    <button type="button" class="nextPageBtn">次ページ</button>
+</div>
+<script th:src="@{/js/invoice/Topic.js}"></script>
+</body>
+</html>

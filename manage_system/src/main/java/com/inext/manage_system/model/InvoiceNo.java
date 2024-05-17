@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InvoiceNo {
 
+    /** 番号 **/
     private int number;
 
+    /** タイプコード **/
     private String type;
 
 }

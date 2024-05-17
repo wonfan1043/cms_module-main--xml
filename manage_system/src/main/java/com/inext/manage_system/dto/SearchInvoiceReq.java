@@ -1,7 +1,5 @@
 package com.inext.manage_system.dto;
 
-import com.inext.manage_system.enums.DateType;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,12 +9,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchInvoiceReq {
 
-    private DateType dateType;
+    /** ページ番号 **/
+    private Integer pageNum;
 
+    /** 日付タイプ **/
+    private int dateType;
+
+    /** 年 **/
     private int year;
 
+    /** 月 **/
     private int month;
 
-    private int corpId;
+    /** 協力会社名 **/
+    private String corpName;
 
 }

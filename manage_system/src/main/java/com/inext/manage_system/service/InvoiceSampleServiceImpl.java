@@ -1,6 +1,7 @@
 package com.inext.manage_system.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.inext.manage_system.dao.InvoiceSampleDao;
 import com.inext.manage_system.enums.CommonMessage;
 import com.inext.manage_system.model.InvoiceSample;
 import com.inext.manage_system.dto.BaseRes;
+import com.inext.manage_system.dto.InvoiceSampleSearchRes;
 
 import org.springframework.util.StringUtils;
 
@@ -18,128 +20,126 @@ public class InvoiceSampleServiceImpl implements InvoiceSampleService {
     @Autowired
     InvoiceSampleDao invoiceSampleDao;
 
-    // サンプル作成
+    /**
+     * 会社サンプルリスト取得
+     * 
+     * @return 会社サンプルリストと結果メッセージ
+     */
     @Override
-    public BaseRes createSample(InvoiceSample sample) {
-        // パラメータチェック
-        if (checkParam(sample, true) ==  false) {
+    public List<InvoiceSample> getSampleList(){
+        // 会社サンプルリストを取得する
+        return invoiceSampleDao.selectSampleList();
+    }
+
+    /**
+     * 会社サンプル取得
+     * 
+     * @param corpName 会社名
+     * @return 会社サンプルと結果メッセージ
+     */
+    @Override
+    public InvoiceSampleSearchRes getSample(String corpName){
+        // 入力チェック                                                                                                                                                                                
+        if(!StringUtils.hasText(corpName)){
+            return new InvoiceSampleSearchRes(null, CommonMessage.PARAM_ERROR.getCode(), CommonMessage.PARAM_ERROR.getMessage());
+        }
+        // サンプル取得
+        InvoiceSample searchResult = invoiceSampleDao.selectInvoiceSampleByCorpName(corpName);
+        return new InvoiceSampleSearchRes(searchResult, CommonMessage.SUCCESS.getCode(), CommonMessage.SUCCESS.getMessage());
+    }
+
+    /**
+     * 会社サンプル作成/編集
+     * 
+     * @param sample 会社サンプルモデル
+     * @return 結果メッセージオブジェクト
+     */
+    @Override
+    public BaseRes createOrUpdateSample(InvoiceSample sample) {
+        // 入力チェック
+        if (checkParam(sample) == false) {
             return new BaseRes(CommonMessage.PARAM_ERROR.getCode(),CommonMessage.PARAM_ERROR.getMessage());
         }
         // 桁数チェック
-        if(checkByte(sample, true) == false){
+        if(checkByte(sample) == false){
             return new BaseRes(CommonMessage.DATA_TOO_BIG.getCode(),CommonMessage.DATA_TOO_BIG.getMessage());
         }
-        // DBにサンプルがすでにあるかチェック
-        if(checkExist(sample, true) == false){
-            return new BaseRes(CommonMessage.SAMPLE_ALREADY_EXISTS.getCode(),CommonMessage.SAMPLE_ALREADY_EXISTS.getMessage());
+        // DBにサンプルがあるかどうかによって作成/編集する
+        // ない場合は作成時間を現時点にしてサンプルを作成する
+        if(checkExist(sample) == false){
+            sample.setCreateDatetime(LocalDateTime.now());
+            invoiceSampleDao.insertInvoiceSample(sample);
+            return new BaseRes(CommonMessage.CREATE_SUCCESS.getCode(),CommonMessage.CREATE_SUCCESS.getMessage());
+        } else {
+            // ある場合は編集時間を現時点にしてサンプルを編集する
+            sample.setUpdateDatetime(LocalDateTime.now());
+            invoiceSampleDao.updateInvoiceSampleByCorpName(sample);
+            return new BaseRes(CommonMessage.UPDATE_SUCCESS.getCode(), CommonMessage.UPDATE_SUCCESS.getMessage());
         }
-        // InvoiceSampleDaoの「サンプル追加」メソッドでサンプル追加
-        sample.setCreateDatetime(LocalDateTime.now()); // 作成時間を現時点にします
-        invoiceSampleDao.insertInvoiceSample(sample);
-        return new BaseRes(CommonMessage.CREATE_SUCCESS.getCode(), CommonMessage.CREATE_SUCCESS.getMessage());
-
     }
 
-    // サンプル更新
-    @Override
-    public BaseRes updateSample(InvoiceSample sample) {
-        // パラメータチェック
-        if (checkParam(sample, false) ==  false) {
-            return new BaseRes(CommonMessage.PARAM_ERROR.getCode(),CommonMessage.PARAM_ERROR.getMessage());
-        }
-        // 桁数チェック
-        if(checkByte(sample, false) == false){
-            return new BaseRes(CommonMessage.DATA_TOO_BIG.getCode(),CommonMessage.DATA_TOO_BIG.getMessage());
-        }
-        // DBにサンプルがあるかチェック
-        if(checkExist(sample, false)){
-            return new BaseRes(CommonMessage.SAMPLE_NOT_FOUND.getCode(),CommonMessage.SAMPLE_NOT_FOUND.getMessage());
-        }
-        // InvoiceSampleDaoの「サンプル編集」メソッドでサンプル編集
-        sample.setUpdateDatetime(LocalDateTime.now()); // 編集時間を現時点にします
-        invoiceSampleDao.updateInvoiceSampleByCorpId(sample);
-        return new BaseRes(CommonMessage.UPDATE_SUCCESS.getCode(), CommonMessage.UPDATE_SUCCESS.getMessage());
-    }
-
-        // サンプル削除
-        @Override
-        public BaseRes deleteSample(InvoiceSample sample) {
-            // 会社IDと編集者が入力されたかチェック
-            if (sample.getCorpId() <= 0 || !StringUtils.hasText(sample.getUpdater())) {
-                return new BaseRes(CommonMessage.PARAM_ERROR.getCode(), CommonMessage.PARAM_ERROR.getMessage());
-            }
-            // 編集者の桁数チェック
-            if (sample.getUpdater().length() > 20) {
-                return new BaseRes(CommonMessage.DATA_TOO_BIG.getCode(), CommonMessage.DATA_TOO_BIG.getMessage());
-            }
-            // DBにサンプルがあるかチェック
-            if (checkExist(sample, false) == false) {
-                return new BaseRes(CommonMessage.INVOICE_NOT_FOUND.getCode(), CommonMessage.INVOICE_NOT_FOUND.getMessage());
-            }
-            // InvoiceSampleDaoの「サンプル状態編集」メソッドで削除フラグを1に編集
-            sample.setUpdateDatetime(LocalDateTime.now()); // 編集時間を現時点にします
-            invoiceSampleDao.updateInvoiceSampleStatusByCorpId(sample);
-            return new BaseRes(CommonMessage.REMOVE_SUCCESS.getCode(), CommonMessage.REMOVE_SUCCESS.getMessage());
-        }
-
-
-    // パラメータチェック
-    private boolean checkParam(InvoiceSample sample, boolean isCreate) {
-        // 必須項目が入力されているか確認します
-        if (sample.getCorpId() <= 0 || !StringUtils.hasText(sample.getTopicId()) || sample.getBankId() <= 0 || sample.getTax() <= 0) {
+    /**
+     * 入力チェック
+     * 
+     * @param sample 会社サンプルモデル
+     * @return 結果の真理値
+     */
+    private boolean checkParam(InvoiceSample sample) {
+        // 会社名、受取人、郵便番号、都道府県、市区町村、番地/住所、主旨はヌル、空文字列、空白文字列ではないこと
+        // 銀行IDと税率はヌルではないこと
+        // 作成者と編集者は、少なくとも1つはヌル、空文字列、空白文字列ではないこと
+        if (!StringUtils.hasText(sample.getCorpName())
+         || !StringUtils.hasText(sample.getReceiver())
+         || !StringUtils.hasText(sample.getPostcode())
+         || !StringUtils.hasText(sample.getCounty())
+         || !StringUtils.hasText(sample.getTown())
+         || !StringUtils.hasText(sample.getAddress())
+         || !StringUtils.hasText(sample.getTopicName())
+         || sample.getBankId() == null
+         || sample.getTax() == null
+         || (!StringUtils.hasText(sample.getCreator()) && !StringUtils.hasText(sample.getUpdater()))) {
             return false;
         }
-        // 作成や編集によって作成者と編集者をチェック
-        if (isCreate) {
-            // 作成の場合は作成者が入力されたか確認します
-            if(!StringUtils.hasText(sample.getCreater())){
-                return false;
-            }
-        } else {
-            // 編集の場合は編集者が入力されたか確認します
-            if (!StringUtils.hasText(sample.getUpdater())) {
-                return false;
-            }
-        }
         return true;
     }
 
-    // 桁数チェック
-    private boolean checkByte(InvoiceSample sample, boolean isCreate) {
-        // 主旨IDが桁数以内であることを確認します
-        if (sample.getTopicId().length() > 20) {
+    /**
+     * 桁数チェック
+     * 
+     * @param sample 会社サンプルモデル
+     * @return 結果の真理値
+     */
+    private boolean checkByte(InvoiceSample sample) {
+        // 10バイト以内：郵便番号
+        // 20バイト以内：会社名、受取人、都道府県、市区町村、作成者と編集者
+        // 45バイト以内：番地/住所、ビル名/部屋番号など、主旨
+        if (sample.getCorpName().length() > 20
+         || sample.getReceiver().length() > 20
+         || sample.getPostcode().length() > 10
+         || sample.getCounty().length() > 20
+         || sample.getTown().length() > 20
+         || sample.getAddress().length() > 45
+         || sample.getBuilding().length() > 45
+         || sample.getTopicName().length() > 45
+         || (sample.getCreator().length() > 20 || sample.getUpdater().length() > 20)) {
             return false;
         }
-        // 作成や編集によって作成者と編集者をチェック
-        if (isCreate) {
-            // 作成の場合は作成者の桁数を確認します
-            if(sample.getCreater().length() > 20){
-                return false;
-            }
-        } else {
-            // 編集の場合は編集者の桁数を確認します
-            if (sample.getUpdater().length() > 20) {
-                return false;
-            }
-        }
         return true;
     }
 
-    // DBにサンプルがあるかチェック
-    private boolean checkExist(InvoiceSample sample, boolean isCreate) {
-        InvoiceSample data = invoiceSampleDao.selectInvoiceSampleByCorpId(sample.getCorpId());
-        if (isCreate) {
-            // 新規の場合、ヌルのはず
-            if (data != null) {
-                return false;
-            }
-        } else {
-            // 更新と削除の場合、ヌではないはず
-            if (data == null) {
-                return false;
-            }
+    /**
+     * DBにサンプルがあるかチェック
+     * 
+     * @param sample 会社サンプルモデル
+     * @return 結果の真理値
+     */
+    private boolean checkExist(InvoiceSample sample) {
+        // 会社名でサンプルを取得する
+        InvoiceSample selectedSample = invoiceSampleDao.selectInvoiceSampleByCorpName(sample.getCorpName());
+        // 出力したサンプルがヌルの場合はfalseを返す
+        if(selectedSample == null){
+            return false;
         }
         return true;
     }
-
 }

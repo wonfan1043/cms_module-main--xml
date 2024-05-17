@@ -1,17 +1,20 @@
 package com.inext.manage_system.service;
 
+import java.util.List;
+
 import com.inext.manage_system.dto.BaseRes;
+import com.inext.manage_system.dto.InvoiceSampleSearchRes;
 import com.inext.manage_system.model.InvoiceSample;
 
 public interface InvoiceSampleService {
 
-    // サンプル作成
-    public BaseRes createSample(InvoiceSample sample);
+    // 会社サンプルリスト取得
+    public List<InvoiceSample> getSampleList();
 
-    // サンプル更新
-    public BaseRes updateSample(InvoiceSample sample);
+    // 会社サンプル取得
+    public InvoiceSampleSearchRes getSample(String corpName);
 
-    // サンプル削除
-    public BaseRes deleteSample(InvoiceSample sample);
+    // 会社サンプル作成/編集
+    public BaseRes createOrUpdateSample(InvoiceSample sample);
 
 }

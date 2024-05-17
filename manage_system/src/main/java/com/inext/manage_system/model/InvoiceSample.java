@@ -12,20 +12,38 @@ import lombok.NoArgsConstructor;
 public class InvoiceSample {
 
     /** 会社ID **/
-    private int corpId;
+    private String corpName;
     
-    /** 主旨ID **/
-    private String topicId;
-    
+    /** 発送先 **/
+    private String receiver;
+
+    /** 発送先郵便番号 **/
+    private String postcode;
+
+    /** 発送先都度府県 **/
+    private String county;
+
+    /** 発送先市区町村 **/
+    private String town;
+
+    /** 発送先住所 **/
+    private String address;
+
+    /** 発送先ビル名 **/
+    private String building;
+
+    /** 主旨 **/
+    private String topicName;
+
     /** 銀行ID **/
-    private int bankId;
-    
+    private Integer bankId;
+
     /** 税率 **/
-    private float tax;
-    
+    private Float tax;
+
     /** 作成者 **/
-    private String creater;
-    
+    private String creator;
+
     /** 作成時間 **/
     private LocalDateTime createDatetime;
     

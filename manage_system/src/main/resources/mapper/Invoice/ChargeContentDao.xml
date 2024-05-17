@@ -7,22 +7,22 @@
     <insert id="insertChargeContent">
         INSERT INTO charge_content 
         (invoice_no,
-         item_id,
+         item_name,
          quantity, 
          unit_price, 
-         creater, 
+         creator, 
          create_datetime,
          updater,
          update_datetime,
          `delete`) 
         VALUES 
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection="chargeContent" item="item" separator=",">
             (#{item.invoiceNo},
-             #{item.itemId}, 
+             #{item.itemName}, 
              #{item.quantity}, 
              #{item.unitPrice}, 
-             #{item.creater}, 
-             #{item.createDateTime},
+             #{item.creator}, 
+             NOW(),
              Null,
              Null,
              0)
@@ -30,23 +30,32 @@
     </insert>
 
     <!-- 請求内容データ数取得 by invoiceNo -->
-    <select id="selectChargeContentByInvoiceNo" resultType="int">
+    <select id="countChargeContentNumByInvoiceNo" resultType="int">
         SELECT COUNT(invoice_no) 
         FROM charge_content 
+        WHERE invoice_no = #{invoiceNo}
+    </select>
+
+    <!-- 請求内容取得 by invoiceNo -->
+    <select id="selectAllChargeContentByInvoiceNo" resultType="com.inext.manage_system.model.ChargeContent">
+        SELECT item_name,
+               quantity,
+               unit_price
+        FROM charge_content
         WHERE invoice_no = #{invoiceNo}
     </select>
 
     <!-- 請求内容削除 by invoiceNo -->
     <delete id="deleteChargeContentByInvoiceNo">
         DELETE FROM charge_content
-        WHERE invoice_no = #{inviceNo}
+        WHERE invoice_no = #{invoiceNo}
     </delete>
 
     <!-- 請求内容状態編集 -->
     <update id="updateChargeContentStatusByInvoiceNo">
         UPDATE charge_content
         SET updater= #{chargeContent.updater}, 
-            updateDateTime = #{chargeContent.updateDateTime}, 
+            update_datetime = NOW(), 
             `delete` = 1
         WHERE invoice_no = #{chargeContent.invoiceNo}
     </update>

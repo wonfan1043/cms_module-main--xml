@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@200;300;400&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "IBM Plex Sans JP", sans-serif;
+    text-decoration: none;
+    background-color: aliceblue;
+}
+
+body {
+    width: 80vw;
+    height: 90vh;
+    margin-top: 3%;
+    margin-left: 10%;
+    padding: 1%;
+    color: royalblue;
+    background-color: rgb(211, 234, 255);
+    border-radius: 10px;
+}
+
+.topArea {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 10%;
+    margin-left: 5%;
+    background-color: rgb(211, 234, 255);
+}
+
+.topArea h1 {
+    margin-top: 2%;
+    background-color: rgb(211, 234, 255);
+}
+
+.topArea .addBtnForm {
+    width: 10%;
+    height: 100%;
+    background-color: rgb(211, 234, 255);
+}
+
+.topArea .addBtnForm .addBtn {
+    width: 100%;
+    height: 100%;
+    background-color: royalblue;
+    font-size: larger;
+    text-align: center;
+    color: aliceblue;
+}
+
+.topArea .addBtnForm .addBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+.searchBar {
+    width: 90%;
+    height: 6%;
+    margin-top: 2%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchBar .allInputs {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: larger;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchBar .allInputs span {
+    padding-top: 0.5%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchBar .allInputs select {
+    width: 10%;
+    padding-left: 0.5%;
+    font-size: large;
+    font-weight: 600;
+    color: royalblue;
+    background-color: aliceblue;
+    border: 1px solid aliceblue;
+}
+
+.searchBar .allInputs input {
+    width: 40%;
+    padding-left: 1.5%;
+    font-size: large;
+    font-weight: 600;
+    color: royalblue;
+    background-color: aliceblue;
+    border: 1px solid aliceblue;
+}
+
+.searchBar .searchBtn {
+    width: 5%;
+    height: 100%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+.searchBar .searchBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+.searchResult {
+    width: 90%;
+    height: 65%;
+    margin-top: 2%;
+    margin-left: 5%;
+    font-size: large;
+    font-weight: 600;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .listTitle {
+    width: 30%;
+    height: 8%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .listTitle .createDateTitle {
+    margin-left: 3%;
+    margin-right: 20%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic {
+    width: 100%;
+    height: 92%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic .topic {
+    width: 100%;
+    height: 5.5vh;
+    margin-top: 1%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic .topic .num {
+    width: 4%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic .topic .createDate {
+    width: 13%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic .topic .topicName {
+    width: 72%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachTopic .topic button {
+    position: absolute;
+    width: 5%;
+    height: 100%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+.searchResult .eachTopic .topic button:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+.searchResult .eachTopic .topic .editBtn {
+    right: 8%;
+}
+
+.searchResult .eachTopic .topic .deleteBtn {
+    right: 0;
+}
+
+.buttons {
+    width: 90%;
+    height: 8%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(211, 234, 255);
+}
+
+.buttons button {
+    width: 10%;
+    height: 100%;
+    margin: 0% 1%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}
+
+.buttons button:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}

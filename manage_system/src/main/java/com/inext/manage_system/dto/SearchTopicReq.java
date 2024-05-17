@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchTopicReq {
 
+    /** ページ番号 **/
+    private Integer pageNum;
+
     /** 年 **/
     private int year;
 

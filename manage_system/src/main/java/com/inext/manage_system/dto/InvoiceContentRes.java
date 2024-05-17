@@ -1,40 +1,31 @@
 package com.inext.manage_system.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 import com.inext.manage_system.enums.CommonMessage;
+import com.inext.manage_system.model.Bank;
+import com.inext.manage_system.model.ChargeContent;
+import com.inext.manage_system.model.Invoice;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class InvoiceContentRes {
 
-    private String invoiceNo;
+    /** 主旨モデル **/
+    private Invoice invoice;
 
-    private int corpId;
+    /** 銀行口座 **/
+    private Bank bank;
 
-    private String topicId;
+    /** 請求内容 **/
+    private List<ChargeContent> product;
 
-    private int bankId;
-
-    private float tax;
-
-    private String memo;
-
-    private LocalDate dueDate;
-
-    private LocalDateTime createDateTime;
-
-    private int itemId;
-
-    private int quantity;
-
-    private int unitPrice;
-
+    /** 結果メッセージ **/
     private CommonMessage message;
-
-    public InvoiceContentRes(CommonMessage message) {
-    }
 
 }

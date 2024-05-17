@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@200;300;400&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "IBM Plex Sans JP", sans-serif;
+    text-decoration: none;
+}
+
+body {
+    border: 1px solid black;
+    width: 80vw;
+    height: 90vh;
+    margin-top: 3%;
+    margin-left: 10%;
+    color: royalblue;
+}
+
+.topArea {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    height: 10%;
+    margin-left: 5%;
+}
+
+.topArea h1 {
+    margin-top: 2%;
+}
+
+.editArea {
+    width: 90%;
+    height: 70%;
+    margin-top: 3%;
+    margin-left: 5%;
+    font-size: large;
+    font-weight: 600;
+    position: relative;
+}
+
+.editArea .timeLabel, .editArea .topicLabel {
+    margin-right: 5%;
+}
+
+.editArea .idLabel {
+    margin-right: 3%;
+}
+
+label .necessary{
+    color: rgb(249, 62, 62);
+}
+
+.editArea .commentLabel {
+    margin-right: 6.5%;
+    position: absolute;
+    top: 38%;
+    left: 0%;
+}
+
+.editArea input {
+    margin-top: 2%;
+    width: 60%;
+    height: 8%;
+    font-size: 90%;
+    padding-left: 1%;
+    background-color: aliceblue;
+}
+
+.editArea textarea {
+    margin-top: 2%;
+    margin-left: 13%;
+    width: 60%;
+    height: 50%;
+    resize: none;
+    font-size: 90%;
+    padding-top: 1%;
+    padding-left: 1%;
+    background-color: aliceblue;
+}
+
+.buttons {
+    width: 90%;
+    height: 7%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons .cancelBtnForm {
+    width: 10%;
+    height: 100%;
+}
+
+.buttons .cancelBtnForm .cancelBtn {
+    width: 100%;
+    height: 100%;
+}
+
+.buttons button {
+    width: 10%;
+    height: 100%;
+    margin: 0% 1%;
+    text-align: center;
+    font-size: large;
+    background-color: royalblue;
+    color: aliceblue;
+}

@@ -5,34 +5,58 @@
 
 <mapper namespace="com.inext.manage_system.dao.InvoiceSampleDao">
 
-    <!-- サンプル請求書番号取得 by corpId -->
-    <select id="selectInvoiceSampleByCorpId" resultType="com.inext.manage_system.model.InvoiceSample">
-        SELECT corp_id,
-               topic_id,
+    <!-- サンプルリスト取得 -->
+    <select id="selectSampleList" resultType="com.inext.manage_system.model.InvoiceSample">
+        SELECT corp_name
+        FROM invoice_sample
+    </select>
+
+    <!-- サンプル取得 by corpName -->
+    <select id="selectInvoiceSampleByCorpName" resultType="com.inext.manage_system.model.InvoiceSample">
+        SELECT corp_name,
+               receiver,
+               county,
+               postcode,
+               town,
+               address,
+               building,
+               topic_name,
                bank_id,
                tax
         FROM invoice_sample
-        WHERE corp_id = #{corpId}
+        WHERE corp_name = #{corpName}
           AND `delete` = 0
     </select>
 
     <!-- サンプル追加 -->
     <insert id="insertInvoiceSample">
         INSERT INTO invoice_sample
-        (corp_id,
-         topic_id,
+        (corp_name,
+         receiver,
+         county,
+         postcode,
+         town,
+         address,
+         building,
+         topic_name,
          bank_id,
          tax,
-         creater,
+         creator,
          create_datetime,
          updater,
          update_datetime,
          `delete`)
-        VALUES (#{invoiceSample.corpId},
-                #{invoiceSample.topicId},
+        VALUES (#{invoiceSample.corpName},
+                #{invoiceSample.receiver},
+                #{invoiceSample.county},
+                #{invoiceSample.postcode},
+                #{invoiceSample.town},
+                #{invoiceSample.address},
+                #{invoiceSample.building},
+                #{invoiceSample.topicName},
                 #{invoiceSample.bankId},
                 #{invoiceSample.tax},
-                #{invoiceSample.creater},
+                #{invoiceSample.creator},
                 #{invoiceSample.createDatetime},
                 Null,
                 Null,
@@ -40,23 +64,20 @@
     </insert>
 
     <!-- サンプル編集 -->
-    <update id="updateInvoiceSampleByCorpId">
+    <update id="updateInvoiceSampleByCorpName">
         UPDATE invoice_sample
-        SET topic_id = #{invoiceSample.topicId},
+        SET receiver = #{invoiceSample.receiver},
+            county = #{invoiceSample.county},
+            postcode = #{invoiceSample.postcode},
+            town = #{invoiceSample.town},
+            address = #{invoiceSample.address},
+            building = #{invoiceSample.building},
+            topic_name = #{invoiceSample.topicName},
             bank_id = #{invoiceSample.bankId},
             tax = #{invoiceSample.tax},
             updater = #{invoiceSample.updater},
             update_datetime = #{invoiceSample.updateDatetime}
-        WHERE corp_id = #{invoiceSample.corpId}
+        WHERE corp_name = #{invoiceSample.corpName}
     </update>
     
-    <!-- サンプル状態編集 -->
-    <update id="updateInvoiceSampleStatusByCorpId">
-        UPDATE invoice_sample
-        SET updater= #{invoiceSample.updater},
-            updateDateTime = #{invoiceSample.updateDatetime},
-            `delete` = 1
-        WHERE corp_id = #{invoiceSample.corpId}
-    </update>
-
 </mapper>

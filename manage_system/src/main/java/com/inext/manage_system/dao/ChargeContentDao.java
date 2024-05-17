@@ -14,8 +14,11 @@ public interface ChargeContentDao {
     public void insertChargeContent(@Param("chargeContent") List<ChargeContent> chargeContent);
 
     //請求内容データ数取得 by invoiceNo
-    public int selectChargeContentByInvoiceNo(@Param("invoiceNo") String invoiceNo);
+    public int countChargeContentNumByInvoiceNo(@Param("invoiceNo") String invoiceNo);
 
+    //請求書内容取得 by invoiceNo
+    public List<ChargeContent> selectAllChargeContentByInvoiceNo(@Param("invoiceNo") String invoiceNo);
+    
     //請求内容削除 by invoiceNo
     public void deleteChargeContentByInvoiceNo(@Param("invoiceNo") String invoiceNo);
 
