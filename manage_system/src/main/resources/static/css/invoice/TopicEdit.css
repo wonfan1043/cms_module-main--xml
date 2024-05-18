@@ -7,15 +7,18 @@
     list-style: none;
     font-family: "IBM Plex Sans JP", sans-serif;
     text-decoration: none;
+    background-color: aliceblue;
 }
 
 body {
-    border: 1px solid black;
     width: 80vw;
     height: 90vh;
     margin-top: 3%;
     margin-left: 10%;
     color: royalblue;
+    background-color: rgb(211, 234, 255);
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 1px rgb(30, 30, 30, .3);
 }
 
 .topArea {
@@ -24,10 +27,18 @@ body {
     width: 90%;
     height: 10%;
     margin-left: 5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .topArea h1 {
+    width: 100%;
     margin-top: 2%;
+    background-color: rgb(211, 234, 255);
+    text-align: center;
+}
+
+span{
+    background-color: rgb(211, 234, 255);
 }
 
 .editArea {
@@ -38,18 +49,22 @@ body {
     font-size: large;
     font-weight: 600;
     position: relative;
+    background-color: rgb(211, 234, 255);
 }
 
 .editArea .timeLabel, .editArea .topicLabel {
     margin-right: 5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .editArea .idLabel {
     margin-right: 3%;
+    background-color: rgb(211, 234, 255);
 }
 
 label .necessary{
     color: rgb(249, 62, 62);
+    background-color: rgb(211, 234, 255);
 }
 
 .editArea .commentLabel {
@@ -57,6 +72,7 @@ label .necessary{
     position: absolute;
     top: 38%;
     left: 0%;
+    background-color: rgb(211, 234, 255);
 }
 
 .editArea input {
@@ -66,11 +82,13 @@ label .necessary{
     font-size: 90%;
     padding-left: 1%;
     background-color: aliceblue;
+    border-radius: 8px;
+    border: 2px solid rgb(118, 141, 162);
 }
 
 .editArea textarea {
     margin-top: 2%;
-    margin-left: 13%;
+    margin-left: 13.8%;
     width: 60%;
     height: 50%;
     resize: none;
@@ -78,6 +96,8 @@ label .necessary{
     padding-top: 1%;
     padding-left: 1%;
     background-color: aliceblue;
+    border-radius: 8px;
+    border: 2px solid rgb(118, 141, 162);
 }
 
 .buttons {
@@ -87,11 +107,13 @@ label .necessary{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(211, 234, 255);
 }
 
 .buttons .cancelBtnForm {
     width: 10%;
     height: 100%;
+    background-color: rgb(211, 234, 255);
 }
 
 .buttons .cancelBtnForm .cancelBtn {
@@ -107,4 +129,41 @@ label .necessary{
     font-size: large;
     background-color: royalblue;
     color: aliceblue;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+button:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+.swal-overlay {
+    background-color: rgb(109, 129, 148, 0.7);
+}
+
+.swal-modal {
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.swal-icon, .swal-title, .swal-text, .swal-footer {
+    background-color: white;
+    text-align: center;
+}
+
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: royalblue;
+    color: aliceblue;
+    font-size: 20px;
+    border: 1px solid royalblue;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }

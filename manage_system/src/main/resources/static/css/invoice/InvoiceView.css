@@ -9,61 +9,87 @@
     text-decoration: none;
     font-weight: 600;
     font-size: large;
+    background-color: aliceblue;
 }
 
 body {
-    border: 1px solid black;
     width: 80vw;
     height: auto;
     margin-top: 3%;
+    margin-bottom: 3%;
     margin-left: 10%;
+    padding-top: 1%;
+    padding-bottom: .5%;
     padding-left: 5%;
+    padding-right: 5%;
     color: royalblue;
+    background-color: rgb(211, 234, 255);
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 1px rgb(30, 30, 30, .3);
 }
 
 .title {
-    width: 90%;
+    width: 80%;
     height: 10%;
     margin-top: 2%;
-    margin-bottom: 2%;
-    font-size: x-large;
+    margin-bottom: 3%;
+    margin-left: 10%;
+    font-size: xx-large;
+    text-align: center;
+    background-color: rgb(211, 234, 255);
+}
+
+.printArea {
+    background-color: rgb(211, 234, 255);
 }
 
 .row {
     display: flex;
+    /* margin-left: 10%; */
     margin-bottom: 1.5%;
+    background-color: rgb(211, 234, 255);
     width: 100%;
     page-break-inside: avoid;
 }
 
 p {
-    width: 20%;
-}
-
-.createDate {
-    width: 60%;
-}
-
-.address {
-    width: 80%;
+    width: 30%;
+    background-color: rgb(211, 234, 255);
+    text-align: center;
 }
 
 .bankAddress {
     width: 100%;
 }
 
-.receiveAddress {
+.addressTitle {
+    width: 42.7%;
+}
+
+.address {
     width: 100%;
 }
 
-.dueDate {
-    width: 20vw;
+.address .addressContent {
+    width: 100%;
+    text-align: left;
+}
+
+.content {
+    width: 70%;
+    text-align: left;
 }
 
 .contentTitle {
     font-size: x-large;
-    margin-top: 2%;
-    margin-bottom: 1.5%;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.contentrow {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 2%;
 }
 
 .contentNo {
@@ -82,6 +108,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(211, 234, 255);
 }
 
 .buttons button {
@@ -92,6 +119,16 @@ p {
     font-size: large;
     background-color: royalblue;
     color: aliceblue;
+}
+
+button {
+    border-radius: 8px;
+}
+
+button:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
 }
 
 @page {
@@ -106,6 +143,10 @@ p {
     * {
         color: black;
     }
+    
+    body{
+        box-shadow: none;
+    }
 
     .row {
         display: flex;
@@ -116,24 +157,40 @@ p {
 
     .contentTitle {
         font-size: x-large;
-        margin-top: 4%;
+        margin-top: 5%;
         margin-bottom: 1.5%;
     }
 
     p {
         width: 35%;
+        text-align: left;
     }
 
-    .contentNo{
+    .contentNo {
         width: 100px;
     }
 
-    .itemNamePrint, .unitPricePrint, .quanityPrint, .eachSumPrint{
+    .contentrow {
+        margin-bottom: 4%;
+    }
+
+    .addressContent{
+        padding-left: 7%;
+    }
+
+
+    .itemNamePrint,
+    .unitPricePrint,
+    .quanityPrint,
+    .eachSumPrint {
         width: 250px;
         margin-right: 10px;
     }
-    
-    .itemName, .unitPrice, .quanity, .eachSum{
+
+    .itemName,
+    .unitPrice,
+    .quanity,
+    .eachSum {
         width: 250px;
         margin-right: 20px;
         word-break: break-all;
@@ -143,4 +200,29 @@ p {
         width: 65%;
         height: auto;
     }
+}
+
+.swal-overlay {
+    background-color: rgb(109, 129, 148, 0.7);
+}
+
+.swal-modal {
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.swal-icon, .swal-title, .swal-text, .swal-footer {
+    background-color: white;
+    text-align: center;
+}
+
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: royalblue;
+    color: aliceblue;
+    font-size: 20px;
+    border: 1px solid royalblue;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }

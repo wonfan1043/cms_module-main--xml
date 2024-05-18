@@ -40,7 +40,11 @@ $(document).ready(function(){
             success: function (data) {
                 if(!data.includes('<div class="topic" id="topic">')){
                     $("#list").empty();
-                    return alert("主旨見つかりませんでした。")
+                    return swal({
+                        title: "残念です！",
+                        text: "主旨見つかりませんでした。",
+                        icon: "info"
+                    });
                 }
                 $("#list").html(data);
             }
@@ -48,16 +52,24 @@ $(document).ready(function(){
     })
 
     // 次ページボタンのクリックイベント処理
-    $(".nextPageBtn").click(function(){
+    $(".nextPageBtn").click(function(){        
         // 画面にすでに情報なしの場合、検索しない
         if($("#topic").length == 0){
-            return alert("主旨を検索してください。");
+            return swal({
+                title: "他のページありません！",
+                text: "主旨を検索してください。",
+                icon: "info"
+            });
         }
         // 現在のページが最後のページの場合、検索しない
         let currentPageNum = $('#currentPageNum').val();
         let lastPageNum = $('#lastPageNum').val();
         if(currentPageNum == lastPageNum){
-            return alert("現在のページは最後のページです。");
+            return swal({
+                title: "もうないです！",
+                text: "現在のページは最後のページです。",
+                icon: "info"
+            });
         }
         // 検索条件の年、月とキーワードを取得する
         let yearData = $("#year").val();
@@ -88,12 +100,20 @@ $(document).ready(function(){
     $(".previousPageBtn").click(function(){
         // 画面にすでに情報なしの場合、検索しない
         if($("#topic").length == 0){
-            return alert("主旨を検索してください。");
+            return swal({
+                title: "他のページありません！",
+                text: "主旨を検索してください。",
+                icon: "info"
+            });
         }
         // 現在のページが最初のページの場合、検索しない
         let currentPageNum = $('#currentPageNum').val();
         if(currentPageNum == 1){
-            return alert("現在のページは最初のページです。");
+            return swal({
+                title: "もうないです！",
+                text: "現在のページは最初のページです。",
+                icon: "info"
+            });
         }
         // 検索条件の年、月とキーワードを取得する
         let yearData = $("#year").val();
@@ -114,6 +134,7 @@ $(document).ready(function(){
             type: 'POST',
             data: JSON.stringify(searchTopicReq),
             contentType: 'application/json',
+            // 検索結果を画面に表示する
             success: function (data) {
                 $("#list").html(data);
             }
@@ -135,55 +156,73 @@ $(document).ready(function(){
         let topicIdData = topicToDeleteData.split('|')[0];
         let topicNameData = topicToDeleteData.split('|')[1];
         // 再確認アラート
-        if(confirm(`主旨「${topicNameData}」を削除してよろしいでしょうか？`) == false){
-            return null;
-        };
-        // 主旨モデルを宣言する
-        let topic = {
-            topicId: topicIdData,
-            topicName: topicNameData,
-            updater: 'admin'
-        };
-        // 主旨を削除する
-        $.ajax({
-            url: "/manager/invoice/delete_topic",
-            type: 'POST',
-            data: JSON.stringify(topic),
-            contentType: "application/json",
-            success: function(data){
-                // 成功の場合、メッセージを表示して、主旨リストを検索して画面を更新する
-                if (data.code === 1006) {
-                    // 成功のメッセージ
-                    if(confirm("主旨は削除されました！")){
-                        // 検索条件の年、月とキーワードを取得する
-                        let yearData = $("#year").val();
-                        let monthData = $("#month").val();
-                        let keywordData = $("#keyword").val();
-                        // ページ番号を取得する
-                        let pageNumData = $('#currentPageNum').val();
-                        // 検査オブジェクトを定義する
-                        let searchTopicReq = {
-                            pageNum: pageNumData,
-                            year: yearData,
-                            month: monthData,
-                            keyword: keywordData
-                        }
-                        // 主旨を検索する
-                        $.ajax({
-                            url: '/manager/invoice/search_topic',
-                            type: 'POST',
-                            data: JSON.stringify(searchTopicReq),
-                            contentType: "application/json",
-                            success: function (data) {
-                                if(!data.includes('<div class="topic" id="topic">')){
-                                    $("#list").empty();
-                                    return null;
-                                }
-                                $("#list").html(data);
-                            }
-                        })
-                    }
+        swal({
+            title: "よろしいですか？",
+            text: `主旨「${topicNameData}」を削除してよろしいでしょうか？`,
+            icon: "warning",
+            buttons: {
+                confirm: {
+                    text: "はい",
+                    visible: true
+                },
+                cancel: {
+                    text: "いいえ",
+                    visible: true
                 }
+            }
+        }).then((res) => {
+            if(res == true){
+                // 主旨モデルを宣言する
+                let topic = {
+                    topicId: topicIdData,
+                    topicName: topicNameData,
+                    updater: 'admin'
+                };
+                // 主旨を削除する
+                $.ajax({
+                    url: "/manager/invoice/delete_topic",
+                    type: 'POST',
+                    data: JSON.stringify(topic),
+                    contentType: "application/json",
+                    success: function(data){
+                        // 成功の場合、メッセージを表示して、主旨リストを検索して画面を更新する
+                        if (data.code === 1006) {
+                            // 成功のメッセージ
+                            swal({
+                                title: "完了です！",
+                                text: "主旨は削除されました。",
+                                icon: "info"
+                            });
+                            // 検索条件の年、月とキーワードを取得する
+                            let yearData = $("#year").val();
+                            let monthData = $("#month").val();
+                            let keywordData = $("#keyword").val();
+                            // ページ番号を取得する
+                            let pageNumData = $('#currentPageNum').val();
+                            // 検査オブジェクトを定義する
+                            let searchTopicReq = {
+                                pageNum: pageNumData,
+                                year: yearData,
+                                month: monthData,
+                                keyword: keywordData
+                            }
+                            // 主旨を検索する
+                            $.ajax({
+                                url: '/manager/invoice/search_topic',
+                                type: 'POST',
+                                data: JSON.stringify(searchTopicReq),
+                                contentType: "application/json",
+                                success: function (data) {
+                                    if(!data.includes('<div class="topic" id="topic">')){
+                                        $("#list").empty();
+                                        return null;
+                                    }
+                                    $("#list").html(data);
+                                }
+                            })
+                        }
+                    }
+                })
             }
         })
     });

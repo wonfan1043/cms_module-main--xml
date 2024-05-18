@@ -52,7 +52,7 @@ $(document).ready(function(){
         localStorage.setItem("county", $(".county").text());
         localStorage.setItem("postcode", $(".postcode").text());
         localStorage.setItem("town", $(".town").text());
-        localStorage.setItem("address", $(".address").text());
+        localStorage.setItem("address", $(".addressSend").text());
         // 発送先ビル名に内容がある場合のみ保存する
         if($("#building").length > 0){
             localStorage.setItem("building", $("#building").text());
@@ -119,14 +119,12 @@ $(document).ready(function(){
         let title = ($(".invoiceNo").text() + "_" + $(".corpName").text() + "_" + createDate);
         $("title").text(title);
         // 要らない部分を非表示する
-        $("body").css('border', 'none');
         $(".title").hide();
         $(".buttons").hide();
         // PDFファイルを出力する
         window.print();
         // 元に戻す
         $("title").text("請求書明細プレビュー");
-        $("body").css('border', '1px solid black');
         $(".title").show();
         $(".buttons").show();
     })

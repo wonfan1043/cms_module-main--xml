@@ -5,6 +5,7 @@
     <title>請求書リスト</title>
     <link th:href="@{/css/invoice/InvoiceList.css}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     
@@ -48,11 +49,11 @@
 <!-- 検索結果アリア -->
 <div class="searchResult">
     <div class="listTitle">
-        <span>No.</span>
+        <span class="numTitle">No.</span>
         <span class="chargeDateTitle">請求日付</span>
         <span class="createDateTitle">作成日付</span>
         <span class="corpTitle">会社</span>
-        <span>主旨</span>
+        <span class="topicTitle">主旨</span>
     </div>
     <div class="eachInvoice" id="list" th:fragment="list">
         <div class="invoice" th:if="${invoiceList != null}" th:each="invoice, index : ${invoiceList.list}">
@@ -60,7 +61,7 @@
             <span class="chargeDate"  th:text="${invoice.chargeDate} ? ${#temporals.format(invoice.chargeDate, 'yyyy/MM/dd')} : 該当情報なし"></span>
             <span class="createDate" th:text="${#temporals.format(invoice.createDatetime, 'yyyy/MM/dd')}"></span>
             <p class="corp" th:text="${invoice.corpName}"></p>
-            <p class="" th:text="${invoice.topicName}"></p>
+            <p class="topic" th:text="${invoice.topicName}"></p>
             <button class="viewBtn" th:data-invoice-to-view="${invoice.invoiceNo}">詳細</button>
             <button class="deleteBtn" th:data-invoice-to-delete="${invoice.invoiceNo}">削除</button>
         </div>

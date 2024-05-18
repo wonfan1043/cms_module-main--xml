@@ -7,15 +7,19 @@
     list-style: none;
     font-family: "IBM Plex Sans JP", sans-serif;
     text-decoration: none;
+    background-color: aliceblue;
 }
 
 body {
-    border: 1px solid black;
     width: 80vw;
     height: 90vh;
     margin-top: 3%;
     margin-left: 10%;
+    padding: 1%;
     color: royalblue;
+    background-color: rgb(211, 234, 255);
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 1px rgb(30,30,30,.3);
 }
 
 .topArea {
@@ -24,29 +28,39 @@ body {
     width: 90%;
     height: 10%;
     margin-left: 5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .topArea h1 {
     margin-top: 2%;
+    background-color: rgb(211, 234, 255);
 }
 
 .topArea .addBtn {
     width: 10%;
     height: 100%;
+    margin-top: 1%;
     text-align: center;
     font-size: larger;
     background-color: royalblue;
     color: aliceblue;
 }
 
+.topArea .addBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
 .searchBar {
     width: 90%;
     height: 6%;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 5%;
     display: flex;
     justify-content: space-between;
     font-weight: 600;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchBar .conditions {
@@ -55,10 +69,12 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: larger;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchBar .conditions span {
     padding-top: 0.5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchBar .conditions select {
@@ -68,31 +84,42 @@ body {
     color: royalblue;
     background-color: aliceblue;
     border: 1px solid aliceblue;
+    border-radius: 5px;
 }
 
 .searchBar .conditions #dateType {
     width: 15%;
+    border-radius: 5px;
 }
 
 .searchBar .conditions #year {
     width: 10%;
+    border-radius: 5px;
 }
 
 .searchBar .conditions #month {
     width: 10%;
+    border-radius: 5px;
 }
 
 .searchBar .conditions #corp {
     width: 35%;
+    border-radius: 5px;
 }
 
 .searchBar .searchBtn {
-    width: 5%;
+    width: 6%;
     height: 100%;
     text-align: center;
     font-size: large;
     background-color: royalblue;
     color: aliceblue;
+}
+
+.searchBar .searchBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
 }
 
 .searchResult {
@@ -102,61 +129,84 @@ body {
     margin-left: 5%;
     font-size: large;
     font-weight: 600;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .listTitle {
     width: 60%;
     height: 8%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .listTitle .numTitle {
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .listTitle .chargeDateTitle {
     margin-left: 3%;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .listTitle .createDateTitle {
     margin: 0% 12.5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .listTitle .corpTitle {
     margin-left: 1.3%;
     margin-right: 20%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .listTitle .topicTitle {
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice {
     width: 100%;
-    height: 92%;
+    height: 90%;
     position: relative;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice {
     width: 100%;
-    height: 9%;
+    height: 10%;
     margin-top: 1%;
     position: relative;
     display: flex;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice .num {
     width: 1vw;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice .chargeDate {
     margin-left: 3.5%;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice .createDate {
     margin: 0% 5%;
     width: 10%;
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice .corp {
     margin-right: 5.8%;
     width: 10%;
+    background-color: rgb(211, 234, 255);
+}
+
+.searchResult .eachInvoice .invoice .topic {
+    background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachInvoice .invoice button {
     position: absolute;
-    width: 5%;
+    width: 6%;
     height: 100%;
     text-align: center;
     font-size: large;
@@ -168,18 +218,31 @@ body {
     right: 8%;
 }
 
+.searchResult .eachInvoice .invoice .viewBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
 .searchResult .eachInvoice .invoice .deleteBtn {
     right: 0;
 }
 
+.searchResult .eachInvoice .invoice .deleteBtn:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
 .buttons {
     width: 90%;
-    height: 7%;
+    height: 8%;
     margin-top: 0.5%;
     margin-left: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(211, 234, 255);
 }
 
 .buttons button {
@@ -190,4 +253,39 @@ body {
     font-size: large;
     background-color: royalblue;
     color: aliceblue;
+}
+
+button{
+    border-radius: 8px;
+}
+
+button:active {
+    border: 1px solid royalblue;
+    color: royalblue;
+    background-color: aliceblue;
+}
+
+.swal-overlay {
+    background-color: rgb(109, 129, 148, 0.7);
+}
+
+.swal-modal {
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.swal-icon, .swal-title, .swal-text, .swal-footer {
+    background-color: white;
+    text-align: center;
+}
+
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: royalblue;
+    color: aliceblue;
+    font-size: 20px;
+    border: 1px solid royalblue;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }

@@ -55,8 +55,11 @@ $(document).ready(function(){
                     if(topicIsDeleted == true){
                         $("#topic").val(corpSample.topicName);
                     } else {
-                        alert(`主旨「${corpSample.topicName}」はすでに削除されました。\n他の主旨を選択してください。`)
-                    }
+                        swal({
+                            title: "残念です！",
+                            text: `主旨「${corpSample.topicName}」はすでに削除されました。\n他の主旨を選択してください。`,
+                            icon: "info"
+                        });                    }
                     // 発送先を表示する
                     $("#receiver").val(corpSample.receiver);
                     // 発送先都道府県を表示する
@@ -79,7 +82,11 @@ $(document).ready(function(){
                     $("#tax").val(corpSample.tax);
                 } else {
                     // エラーの場合はエラーメッセージを表示する
-                    alert(`${data.message.message}!\nやり直しお願いします。`)
+                    swal({
+                        title: "残念です！",
+                        text: `${data.message.message}!\nやり直しお願いします。`,
+                        icon: "error"
+                    });
                 }
             }
         })
@@ -260,13 +267,21 @@ $(document).ready(function(){
         // 長さで内容あるかチェックする
         if(taxInput.length == 0){
             $(".taxInput").val(null);
-            return alert("税率を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "税率を入力してください。",
+                icon: "info"
+            });
         }
         // 1-99の正の整数であるかチェックする
         let taxRatePattern = /^(0?[1-9]|[1-9][0-9])$/;
         if(taxRatePattern.test(taxInput) == false){
             $(".taxInput").val(null);
-            return alert("無効な税率です。1~99の正の整数を入力してください。");
+            return swal({
+                title: "お願い！",
+                text: "無効な税率です。1~99の正の整数を入力してください。",
+                icon: "info"
+            });
         }
         // 重複する税率であるかチェックする
         let newTaxRate = parseFloat(parseInt(taxInput)/100);
@@ -278,14 +293,22 @@ $(document).ready(function(){
         })
         if(isDuplicated == true){
             $(".taxInput").val(null);
-            return alert("重複する税率です。\n直接ドロップダウンリストから選択してください。");
+            return swal({
+                title: "お願い！",
+                text: "重複する税率です。\n直接ドロップダウンリストから選択してください。",
+                icon: "info"
+            });
         }
         // 新しい選択肢を追加する
         let newTaxText = parseInt(taxInput);
         let newTaxOption = $(`<option value="${newTaxRate}">${newTaxText}%</option>`);
         $("#tax").append(newTaxOption);
         $(".taxInput").val(null);
-        alert("税率を追加しました！")
+        swal({
+            title: "ナイス！",
+            text: "税率を追加しました！",
+            icon: "info"
+        });
     })
 
     // 決済期限の年の変更イベント処理
@@ -388,7 +411,11 @@ $(document).ready(function(){
     if(topicExists == true){
         $("#topic").val(originalTopic);
     } else {
-        alert(`主旨「${originalTopic}」はすでに削除されました。\n他の主旨を選択してください。`)
+        swal({
+            title: "残念です！",
+            text: `主旨「${corpSample.topicName}」はすでに削除されました。\n他の主旨を選択してください。`,
+            icon: "info"
+        });
     }
     // 発送先を設定する
     $("#receiver").val(localStorage.getItem("receiver"));
@@ -513,19 +540,69 @@ $(document).ready(function(){
     // モード保存ボタンのクリックイベント
     $(".sampleBtn").click(function(){
         // 選択された発注先を取得する
-        let corpNameData = $("#supplier").val().split("|")[1];
+        let corpNameData = $("#supplier").val();
+        if(corpNameData == undefined){
+            return swal({
+                title: "まだまだ！",
+                text: "発注先を選択してください。",
+                icon: "info"
+            });
+        }
+        corpNameData = corpNameData.split("|")[1];
         // 選択された主旨を取得する
         let topicNameData = $("#topic").val();
+        if(topicNameData == undefined){
+            return swal({
+                title: "まだまだ！",
+                text: "主旨を選択してください。",
+                icon: "info"
+            });
+        }
         // 選択された発送先を取得する
         let receiverData = $("#receiver").val();
+        if(receiverData.length == 0){
+            return swal({
+                title: "まだまだ！",
+                text: "発送先を入力してください。",
+                icon: "info"
+            });
+        }
         // 選択された発送先都道府県を取得する
         let postcodeData = $("#postcode").val();
+        if(countyData.length == 0){
+            return swal({
+                title: "まだまだ！",
+                text: "発送先都道府県を入力してください。",
+                icon: "info"
+            });
+        }
         // 選択された発送先郵便番号を取得する
         let countyData = $("#county").val();
+        if(postcodeData.length == 0){
+            return swal({
+                title: "まだまだ！",
+                text: "発送先郵便番号を入力してください。",
+                icon: "info"
+            });
+        }
         // 選択された発送先市区町村を取得する
         let townData = $("#town").val();
+        if(townData.length == 0){
+            return swal({
+                title: "まだまだ！",
+                text: "発送先市区町村を入力してください。",
+                icon: "info"
+            });
+        }
         // 選択された発送先住所を取得する
         let addressData = $("#address").val();
+        if(addressData.length == 0){
+            return swal({
+                title: "まだまだ！",
+                text: "発送先住所を入力してください。",
+                icon: "info"
+            });
+        }
         // 発送先ビル名が入力された場合は内容を取得する
         let buildingData;
         if($("#building").length > 0){
@@ -533,6 +610,13 @@ $(document).ready(function(){
         }
         // 選択された銀行を取得する
         let bankIdData = selectedBank.val();
+        if(bankIdData == undefined){
+            return swal({
+                title: "まだまだ！",
+                text: "振込銀行選択を入力してください。",
+                icon: "info"
+            });
+        }
         // 選択された税率を取得する
         let taxRate = tax.val();
         // 会社サンプルのモデルを宣言する
@@ -550,7 +634,7 @@ $(document).ready(function(){
             creator: "admin",
             updater: "admin"
         }
-        // サンプル保存のAPIを呼び出す
+        // サンプルを保存する
         $.ajax({
             url: "/manager/invoice/save_sample",
             type: 'POST',
@@ -560,14 +644,32 @@ $(document).ready(function(){
                 // 成功時の処理
                 if(data.code == 1010 || data.code == 1008){
                     // 成功メッセージを表示し、ホームページに戻るかどうか確認する
-                    if(confirm(`${data.message}!\nホームページに戻りますか？`)){
-                        window.location.href = "/manager/invoice/invoice_list";
-                    }
+                    swal({
+                        title: "ナイス！",
+                        text: `${data.message}!\nホームページに戻りますか？`,
+                        icon: "warning",
+                        buttons: {
+                            confirm: {
+                                text: "はい",
+                                visible: true
+                            },
+                            cancel: {
+                                text: "いいえ",
+                                visible: true
+                            }
+                        }
+                    }).then((res) => {
+                        if(res == true){
+                            window.location.href = "/manager/invoice/invoice_list";
+                        }
+                    })
+                } else {
+                    swal({
+                        titl: "残念です！",
+                        text: `${data.message}!\nやり直しお願いします。`,
+                        icon: "error"
+                    })
                 }
-            },
-            error: function(){
-                // エラーメッセージを表示する
-                alert("エラーが発生しました。\n入力した内容を再確認したうえ、やり直しお願いします。");
             }
         })
     })
@@ -580,45 +682,80 @@ $(document).ready(function(){
         // 発注先
         let corpNameData = $("#supplier").val();
         if(corpNameData == undefined){
-            return alert("発注先を選択してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発注先を選択してください。",
+                icon: "info"
+            });
         }
         corpNameData = corpNameData.split("|")[1];
         // 主旨
         let topicNameData = $("#topic").val();
         if(topicNameData == undefined){
-            return alert("主旨を選択してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "主旨を選択してください。",
+                icon: "info"
+            });
         }
         // 発送先
         let receiverData = $("#receiver").val();
         if(receiverData.length == 0){
-            return alert("発送先を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発送先を入力してください。",
+                icon: "info"
+            });
         }
         // 発送先都道府県
         let countyData = $("#county").val();
         if(countyData.length == 0){
-            return alert("発送先都道府県を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発送先都道府県を入力してください。",
+                icon: "info"
+            });
         }
         // 発送先郵便番号
         let postcodeData = $("#postcode").val();
         if(postcodeData.length == 0){
-            return alert("発送先郵便番号を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発送先郵便番号を入力してください。",
+                icon: "info"
+            });
         }
         // 発送先市区町村
         let townData = $("#town").val();
         if(townData.length == 0){
-            return alert("発送先市区町村を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発送先市区町村を入力してください。",
+                icon: "info"
+            });
         }
         // 発送先住所
         let addressData = $("#address").val();
         if(addressData.length == 0){
-            return alert("発送先住所を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "発送先住所を入力してください。",
+                icon: "info"
+            });
         }
         // 発送先ビル名
-        let buildingData = $("#building").val();
+        let buildingData;
+        if($("#building").length > 0){
+            buildingData = $("#building").val();
+        }
         // 振込銀行選択
         let bankIdData = selectedBank.val();
         if(bankIdData == undefined){
-            return alert("振込銀行選択を入力してください。");
+            return swal({
+                title: "まだまだ！",
+                text: "振込銀行選択を入力してください。",
+                icon: "info"
+            });
         }
         // 商品名
         let itemNameData = $("#product");
@@ -630,7 +767,11 @@ $(document).ready(function(){
         let chargeContent = [];
         for(let i = 0; i < itemNameData.length; i++){
             if(itemNameData[i].value.length == 0 || quantityData[i].value.length == 0 || unitPriceData[i].value.length == 0){
-                return alert("請求内容を入力してください")
+                return swal({
+                    title: "まだまだ！",
+                    text: "請求内容を入力してください。",
+                    icon: "info"
+                });
             }
             // 1つずつを配列に追加する
             let itemData = {
@@ -646,7 +787,11 @@ $(document).ready(function(){
         let taxRate = tax.val();
         // 決済期限
         if($("#year").val() == undefined || $("#month").val() == undefined || $("#date").val() == undefined){
-            return alert("決済期限を再確認してください。")
+            return swal({
+                title: "まだまだ！",
+                text: "決済期限を再確認してください。",
+                icon: "info"
+            });
         }
         let timeZoneOptions = {timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit'};
         let jpCurrentTime = new Intl.DateTimeFormat('ja-JP', timeZoneOptions).format(new Date());
@@ -654,61 +799,110 @@ $(document).ready(function(){
         let currentTime = parseInt(timeArr[0]+timeArr[1]+timeArr[2]);
         let paymentDueInput = parseInt($("#year").val() + $("#month").val() + $("#date").val());
         if(currentTime > paymentDueInput){
-            if(!confirm("決済期限は過去の時間となっております。\n編集する場合、「取消」を押してください。")){
-                return alert("保存作業はキャンセルされました。");
-            }
-        }
-        let paymentDue = $("#year").val() + '-' + $("#month").val() + '-' + $("#date").val();
-        // メモを取得する
-        let memoData = $("#memo").val();
-        // 保存reqのオブジェクトを定義する
-        let req = {
-            invoice: {
-                invoiceNo: invoiceNoData,
-                corpName: corpNameData,
-                receiver: receiverData,
-                postcode: postcodeData,
-                county: countyData,
-                town: townData,
-                address: addressData,
-                building: buildingData,
-                topicName: topicNameData,
-                bankId: bankIdData,
-                tax: taxRate,
-                memo: memoData,
-                dueDate: paymentDue,
-                chargeDate: paymentDue,
-                updater: "admin"
-            },
-            products: chargeContent
-        }
-        // 請求書編集のAPIを呼び出す
-        $.ajax({
-            url: '/manager/invoice/update_invoice',
-            type: 'POST',
-            data: JSON.stringify(req),
-            contentType: "application/json",
-            success: function(data){
-                // 成功の場合、メッセージを表示してホームページにリダイレクト
-                if(data.code == 1008){
-                    if(confirm("請求書を編集しました！")){
-                        window.location.href = "/manager/invoice/invoice_list";
+            swal({
+                title: "よろしいですか？",
+                text: `決済期限は過去の時間となっております。\n編集する場合、「いいえ」を押してください。`,
+                icon: "warning",
+                buttons: {
+                    confirm: {
+                        text: "はい",
+                        visible: true
+                    },
+                    cancel: {
+                        text: "いいえ",
+                        visible: true
                     }
-                } else {
-                    // エラーの場合はメッセージを表示する
-                    alert(`${data.message}`)
                 }
-            }
-        })
-
+            }).then((res) => {
+                if(res == true){
+                    let paymentDue = $("#year").val() + '-' + $("#month").val() + '-' + $("#date").val();
+                    // メモを取得する
+                    let memoData = $("#memo").val();
+                    // 保存reqのオブジェクトを定義する
+                    let req = {
+                        invoice: {
+                            invoiceNo: invoiceNoData,
+                            corpName: corpNameData,
+                            receiver: receiverData,
+                            postcode: postcodeData,
+                            county: countyData,
+                            town: townData,
+                            address: addressData,
+                            building: buildingData,
+                            topicName: topicNameData,
+                            bankId: bankIdData,
+                            tax: taxRate,
+                            memo: memoData,
+                            dueDate: paymentDue,
+                            chargeDate: paymentDue,
+                            updater: "admin"
+                        },
+                        products: chargeContent
+                    }
+                    // 請求書編集する
+                    $.ajax({
+                        url: '/manager/invoice/update_invoice',
+                        type: 'POST',
+                        data: JSON.stringify(req),
+                        contentType: "application/json",
+                        success: function(data){
+                            // 成功の場合、メッセージを表示してホームページにリダイレクト
+                            if(data.code == 1008){
+                                swal({
+                                    title: "ナイス！",
+                                    text: "請求書編集しました！",
+                                    icon: "success"
+                                })
+                                .then((res) => {
+                                    if(res == true){
+                                        window.location.href = '/manager/invoice/invoice_list';
+                                    }
+                                })
+                            } else {
+                                // エラーの場合はメッセージを表示する
+                                swal({
+                                    title: "残念です！",
+                                    text: `${data.message}!`,
+                                    icon: "error"
+                                })
+                            }
+                        },
+                        error: function(){
+                            // エラーの場合はメッセージを表示する
+                            swal({
+                                title: "残念です！",
+                                text: "エラーが発生しました...\nホームページに戻ってやり直してください。",
+                                icon: "error"
+                            })
+                        }
+                    })
+                }
+            })
+        }
     })
 
     // 取消ボタンのクリックイベント処理
     $(".cancelBtn").click(function(){
         // アラートで再確認する
-        if(confirm("編集した内容はまだ保存されていませんが、よろしいでしょうか？")){
-            // ホームページにリダイレクト
-            window.location.href = "/manager/invoice/invoice_list";
-        }
+        swal({
+            title: "よろしいですか？",
+            text: "編集した内容は保存されませんが、よろしいでしょうか？",
+            icon: "warning",
+            buttons: {
+                confirm: {
+                    text: "はい",
+                    visible: true
+                },
+                cancel: {
+                    text: "いいえ",
+                    visible: true
+                }
+            }
+        }).then((res) => {
+            if(res == true){
+                // 請求書リストページへ戻る
+                window.location.href = "/manager/invoice/invoice_list";
+            }
+        })
     })
 })

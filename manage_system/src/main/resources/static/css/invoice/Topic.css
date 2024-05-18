@@ -19,6 +19,7 @@ body {
     color: royalblue;
     background-color: rgb(211, 234, 255);
     border-radius: 10px;
+    box-shadow: 0px 1px 5px 1px rgb(30,30,30,.3);
 }
 
 .topArea {
@@ -38,6 +39,7 @@ body {
 .topArea .addBtnForm {
     width: 10%;
     height: 100%;
+    margin-top: 1%;
     background-color: rgb(211, 234, 255);
 }
 
@@ -59,7 +61,7 @@ body {
 .searchBar {
     width: 90%;
     height: 6%;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 5%;
     display: flex;
     justify-content: space-between;
@@ -89,6 +91,7 @@ body {
     color: royalblue;
     background-color: aliceblue;
     border: 1px solid aliceblue;
+    border-radius: 5px;
 }
 
 .searchBar .allInputs input {
@@ -99,6 +102,7 @@ body {
     color: royalblue;
     background-color: aliceblue;
     border: 1px solid aliceblue;
+    border-radius: 5px;
 }
 
 .searchBar .searchBtn {
@@ -127,14 +131,14 @@ body {
 }
 
 .searchResult .listTitle {
-    width: 30%;
+    width: 40%;
     height: 8%;
     background-color: rgb(211, 234, 255);
 }
 
 .searchResult .listTitle .createDateTitle {
-    margin-left: 3%;
-    margin-right: 20%;
+    margin-left: 12%;
+    margin-right: 24%;
     background-color: rgb(211, 234, 255);
 }
 
@@ -155,12 +159,12 @@ body {
 }
 
 .searchResult .eachTopic .topic .num {
-    width: 4%;
+    width: 8%;
     background-color: rgb(211, 234, 255);
 }
 
 .searchResult .eachTopic .topic .createDate {
-    width: 13%;
+    width: 17%;
     background-color: rgb(211, 234, 255);
 }
 
@@ -222,4 +226,30 @@ body {
 button {
     border: none;
     cursor: pointer;
+    border-radius: 8px;
+}
+
+.swal-overlay {
+    background-color: rgb(109, 129, 148, 0.7);
+}
+
+.swal-modal {
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.swal-icon, .swal-title, .swal-text, .swal-footer {
+    background-color: white;
+    text-align: center;
+}
+
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: royalblue;
+    color: aliceblue;
+    font-size: 20px;
+    border: 1px solid royalblue;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
